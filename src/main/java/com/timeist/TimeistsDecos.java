@@ -15,9 +15,11 @@ import com.timeist.database.Database;
 import com.timeist.database.SQLite;
 import com.timeist.handlers.BrandHandler;
 import com.timeist.listeners.AsyncPlayerChatListener;
+import com.timeist.listeners.DiscordChannelListener;
 import com.timeist.listeners.PlayerJoinListener;
 import com.timeist.listeners.PlayerQuitListener;
 import java.util.Objects;
+
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.PluginCommand;
@@ -32,6 +34,7 @@ public class TimeistsDecos extends JavaPlugin {
     private Database database;
     Permission permission = null;
     public static String url;
+    private Database tupperdb;
 
     public TimeistsDecos() {
         instance = this;
@@ -49,6 +52,9 @@ public class TimeistsDecos extends JavaPlugin {
         return this.database;
     }
 
+
+    public Database getTupperdb() { return this.tupperdb; }
+
     public void onEnable() {
         this.getLogger().info("Lum's Dekos project started on 1/27/18. It is developed & maintained by Timiette.");
         if (!this.setupVault()) {
@@ -65,8 +71,21 @@ public class TimeistsDecos extends JavaPlugin {
             this.getConfig().options().copyDefaults(true);
             this.getConfig().addDefault("webhook", "CHANGEME");
             this.saveConfig();
+
+            this.getConfig().addDefault("bottoken", "CHANGEME");
+
+
+            if(this.getConfig().getString("bottoken").equalsIgnoreCase("CHANGEME")) {
+                /**final DiscordClient client = DiscordClient.create(this.getConfig().getString("bottoken"));
+                final GatewayDiscordClient gateway = client.login().block();**/
+            } else {
+                this.getLogger().warning("!!!! You have not set a bot token in the config! Some functionality will be limited. !!!!");
+            }
+
             this.database = new SQLite(this);
             this.database.load();
+            this.tupperdb = new SQLite(this);
+            this.tupperdb.load();
             url = this.getConfig().getString("webhook");
             Util.init();
             ((PluginCommand)Objects.requireNonNull(this.getCommand("me"))).setExecutor(new MeCommand());
@@ -87,6 +106,7 @@ public class TimeistsDecos extends JavaPlugin {
             this.getServer().getOnlinePlayers().forEach((player) -> {
                 Util.addPlayerData(player.getUniqueId());
             });
+            this.getServer().getPluginManager().registerEvents((new DiscordChannelListener()), this);
         }
 
     }

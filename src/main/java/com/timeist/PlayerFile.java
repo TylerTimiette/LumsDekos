@@ -13,7 +13,7 @@ public class PlayerFile {
     private FileConfiguration config;
 
     public PlayerFile(UUID uuid) {
-        this.path = TimeistsDecos.getInstance().getDataFolder() + File.separator + "Player Data";
+        this.path = TimeistsDecos.getInstance().getDataFolder() + File.separator + "PlayerData";
         this.uuid = uuid;
         this.file = new File(this.path, uuid.toString().replaceAll("-", "") + ".yml");
         this.config = YamlConfiguration.loadConfiguration(this.file);
