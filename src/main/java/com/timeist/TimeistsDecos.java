@@ -1,16 +1,17 @@
 package com.timeist;
 
-import com.timeist.commands.ArrowCommand;
-import com.timeist.commands.ColorCommand;
-import com.timeist.commands.EmoteCommand;
-import com.timeist.commands.IgnoreCommand;
-import com.timeist.commands.LinkCommand;
-import com.timeist.commands.MeCommand;
-import com.timeist.commands.NickCommand;
-import com.timeist.commands.PrefixCommand;
-import com.timeist.commands.QuoteCommand;
-import com.timeist.commands.SpecialChatCommand;
-import com.timeist.commands.WebhookCommand;
+import com.timeist.discordcommands.RegisterCommand;
+import com.timeist.minecraftcommands.ArrowCommand;
+import com.timeist.minecraftcommands.ColorCommand;
+import com.timeist.minecraftcommands.EmoteCommand;
+import com.timeist.minecraftcommands.IgnoreCommand;
+import com.timeist.minecraftcommands.LinkCommand;
+import com.timeist.minecraftcommands.MeCommand;
+import com.timeist.minecraftcommands.NickCommand;
+import com.timeist.minecraftcommands.PrefixCommand;
+import com.timeist.minecraftcommands.QuoteCommand;
+import com.timeist.minecraftcommands.SpecialChatCommand;
+import com.timeist.minecraftcommands.WebhookCommand;
 import com.timeist.database.Database;
 import com.timeist.database.SQLite;
 import com.timeist.handlers.BrandHandler;
@@ -20,6 +21,7 @@ import com.timeist.listeners.PlayerJoinListener;
 import com.timeist.listeners.PlayerQuitListener;
 import java.util.Objects;
 
+import github.scarsz.discordsrv.DiscordSRV;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.PluginCommand;
@@ -28,13 +30,16 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TimeistsDecos extends JavaPlugin {
+public class TimeistsDecos extends JavaPlugin  {
     private static TimeistsDecos instance;
     private static Chat chat = null;
     private Database database;
     Permission permission = null;
     public static String url;
     private Database tupperdb;
+
+    private DiscordReady reg = new DiscordReady();
+    private RegisterCommand rc = new RegisterCommand();
 
     public TimeistsDecos() {
         instance = this;
@@ -107,11 +112,17 @@ public class TimeistsDecos extends JavaPlugin {
                 Util.addPlayerData(player.getUniqueId());
             });
             this.getServer().getPluginManager().registerEvents((new DiscordChannelListener()), this);
+            DiscordSRV.api.subscribe(reg);
+            System.out.println("Did this work?");
+            DiscordSRV.api.subscribe(rc);
+            System.out.println("How about this?");
         }
 
     }
 
     public void onDisable() {
+        DiscordSRV.api.unsubscribe(reg);
+        DiscordSRV.api.unsubscribe(rc);
     }
 
     private boolean setupVault() {

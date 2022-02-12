@@ -1,4 +1,4 @@
-package com.timeist.commands;
+package com.timeist.minecraftcommands;
 
 import com.timeist.PlayerFile;
 import com.timeist.Util;
