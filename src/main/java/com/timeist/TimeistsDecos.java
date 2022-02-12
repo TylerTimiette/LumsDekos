@@ -1,6 +1,7 @@
 package com.timeist;
 
 import com.timeist.discordcommands.RegisterCommand;
+import com.timeist.listeners.*;
 import com.timeist.minecraftcommands.ArrowCommand;
 import com.timeist.minecraftcommands.ColorCommand;
 import com.timeist.minecraftcommands.EmoteCommand;
@@ -15,10 +16,7 @@ import com.timeist.minecraftcommands.WebhookCommand;
 import com.timeist.database.Database;
 import com.timeist.database.SQLite;
 import com.timeist.handlers.BrandHandler;
-import com.timeist.listeners.AsyncPlayerChatListener;
-import com.timeist.listeners.DiscordChannelListener;
-import com.timeist.listeners.PlayerJoinListener;
-import com.timeist.listeners.PlayerQuitListener;
+
 import java.util.Objects;
 
 import github.scarsz.discordsrv.DiscordSRV;
@@ -38,8 +36,10 @@ public class TimeistsDecos extends JavaPlugin  {
     public static String url;
     private Database tupperdb;
 
-    private DiscordReady reg = new DiscordReady();
+    private DiscordReadyListener reg = new DiscordReadyListener();
     private RegisterCommand rc = new RegisterCommand();
+    private DiscordLinkListener dlink = new DiscordLinkListener();
+    private DiscordUnlinkListener dunlink = new DiscordUnlinkListener();
 
     public TimeistsDecos() {
         instance = this;
@@ -75,17 +75,9 @@ public class TimeistsDecos extends JavaPlugin  {
             this.getConfig().addDefault("prefix", "&a&lTimeistsDekos &f&l» &r");
             this.getConfig().options().copyDefaults(true);
             this.getConfig().addDefault("webhook", "CHANGEME");
+            this.getConfig().addDefault("link-logging", "changeme");
             this.saveConfig();
 
-            this.getConfig().addDefault("bottoken", "CHANGEME");
-
-
-            if(this.getConfig().getString("bottoken").equalsIgnoreCase("CHANGEME")) {
-                /**final DiscordClient client = DiscordClient.create(this.getConfig().getString("bottoken"));
-                final GatewayDiscordClient gateway = client.login().block();**/
-            } else {
-                this.getLogger().warning("!!!! You have not set a bot token in the config! Some functionality will be limited. !!!!");
-            }
 
             this.database = new SQLite(this);
             this.database.load();
@@ -116,6 +108,9 @@ public class TimeistsDecos extends JavaPlugin  {
             System.out.println("Did this work?");
             DiscordSRV.api.subscribe(rc);
             System.out.println("How about this?");
+
+            DiscordSRV.api.subscribe(dlink);
+            DiscordSRV.api.subscribe(dunlink);
         }
 
     }
@@ -123,6 +118,8 @@ public class TimeistsDecos extends JavaPlugin  {
     public void onDisable() {
         DiscordSRV.api.unsubscribe(reg);
         DiscordSRV.api.unsubscribe(rc);
+        DiscordSRV.api.unsubscribe(dlink);
+        DiscordSRV.api.unsubscribe(dunlink);
     }
 
     private boolean setupVault() {

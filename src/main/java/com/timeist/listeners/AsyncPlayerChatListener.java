@@ -99,7 +99,7 @@ public class AsyncPlayerChatListener implements Listener {
             }
 
             DiscordWebhook hook = new DiscordWebhook();
-            hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[k-oK-O]", "")) + " // " + player.getName()));
+            hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName()));
             hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
             hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
             hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");

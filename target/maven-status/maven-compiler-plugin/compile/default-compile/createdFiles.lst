@@ -1,7 +1,7 @@
 com/timeist/minecraftcommands/MeCommand$1.class
 com/timeist/listeners/PlayerQuitListener.class
+com/timeist/listeners/DiscordReadyListener.class
 com/timeist/listeners/PlayerJoinListener.class
-com/timeist/DiscordReady.class
 com/timeist/PlayerData.class
 com/timeist/minecraftcommands/SpecialChatCommand.class
 com/timeist/minecraftcommands/AvatarCommand.class
@@ -12,6 +12,7 @@ com/timeist/listeners/DiscordChannelListener.class
 com/timeist/minecraftcommands/WebhookCommand.class
 com/timeist/discordcommands/RegisterCommand.class
 com/timeist/listeners/AsyncPlayerChatListener.class
+com/timeist/listeners/DiscordLinkListener.class
 com/timeist/minecraftcommands/MeCommand.class
 com/timeist/DiscordWebhook.class
 com/timeist/minecraftcommands/EmoteCommand.class
@@ -24,6 +25,7 @@ com/timeist/minecraftcommands/CharacterRegisterCommand.class
 com/timeist/minecraftcommands/ColorCommand.class
 com/timeist/minecraftcommands/ChannelListenCommand.class
 com/timeist/minecraftcommands/QuoteCommand.class
+com/timeist/listeners/DiscordUnlinkListener.class
 com/timeist/minecraftcommands/ArrowCommand.class
 com/timeist/database/SQLite.class
 com/timeist/PlayerFile.class

@@ -5,11 +5,11 @@
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/TimeistsDecos.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/DiscordWebhook.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/discordcommands/RegisterCommand.java
-/home/lum/IdeaProjects/untitled/src/main/java/com/timeist/DiscordReady.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/PlayerData.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/DiscordChannelListener.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/NickCommand.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/database/SQLite.java
+/home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/DiscordLinkListener.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/PrefixCommand.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/AsyncPlayerChatListener.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/MeCommand.java
@@ -22,7 +22,9 @@
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/AvatarCommand.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/PlayerFile.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/IgnoreCommand.java
+/home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/DiscordReadyListener.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/EmoteCommand.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/PlayerJoinListener.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/PlayerQuitListener.java
 /home/lum/IdeaProjects/untitled/src/main/java/com/timeist/minecraftcommands/ChannelListenCommand.java
+/home/lum/IdeaProjects/untitled/src/main/java/com/timeist/listeners/DiscordUnlinkListener.java
