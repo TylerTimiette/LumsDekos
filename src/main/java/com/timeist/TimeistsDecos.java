@@ -1,6 +1,7 @@
 package com.timeist;
 
-import com.timeist.discordcommands.RegisterCommand;
+import com.timeist.discordcommands.TestCommand;
+import com.timeist.discordcommands.WhoAmICommand;
 import com.timeist.listeners.*;
 import com.timeist.minecraftcommands.ArrowCommand;
 import com.timeist.minecraftcommands.ColorCommand;
@@ -37,9 +38,9 @@ public class TimeistsDecos extends JavaPlugin  {
     private Database tupperdb;
 
     private DiscordReadyListener reg = new DiscordReadyListener();
-    private RegisterCommand rc = new RegisterCommand();
     private DiscordLinkListener dlink = new DiscordLinkListener();
     private DiscordUnlinkListener dunlink = new DiscordUnlinkListener();
+    private WhoAmICommand whois = new WhoAmICommand();
 
     public TimeistsDecos() {
         instance = this;
@@ -105,10 +106,6 @@ public class TimeistsDecos extends JavaPlugin  {
             });
             this.getServer().getPluginManager().registerEvents((new DiscordChannelListener()), this);
             DiscordSRV.api.subscribe(reg);
-            System.out.println("Did this work?");
-            DiscordSRV.api.subscribe(rc);
-            System.out.println("How about this?");
-
             DiscordSRV.api.subscribe(dlink);
             DiscordSRV.api.subscribe(dunlink);
         }
@@ -117,7 +114,6 @@ public class TimeistsDecos extends JavaPlugin  {
 
     public void onDisable() {
         DiscordSRV.api.unsubscribe(reg);
-        DiscordSRV.api.unsubscribe(rc);
         DiscordSRV.api.unsubscribe(dlink);
         DiscordSRV.api.unsubscribe(dunlink);
     }

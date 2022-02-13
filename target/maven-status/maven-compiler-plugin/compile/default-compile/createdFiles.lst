@@ -10,7 +10,6 @@ com/timeist/minecraftcommands/IgnoreCommand.class
 com/timeist/minecraftcommands/PrefixCommand.class
 com/timeist/listeners/DiscordChannelListener.class
 com/timeist/minecraftcommands/WebhookCommand.class
-com/timeist/discordcommands/RegisterCommand.class
 com/timeist/listeners/AsyncPlayerChatListener.class
 com/timeist/listeners/DiscordLinkListener.class
 com/timeist/minecraftcommands/MeCommand.class
@@ -21,11 +20,13 @@ com/timeist/minecraftcommands/NickCommand.class
 com/timeist/minecraftcommands/LinkCommand.class
 com/timeist/Util.class
 com/timeist/database/Database.class
+com/timeist/discordcommands/WhoAmICommand.class
 com/timeist/minecraftcommands/CharacterRegisterCommand.class
 com/timeist/minecraftcommands/ColorCommand.class
 com/timeist/minecraftcommands/ChannelListenCommand.class
 com/timeist/minecraftcommands/QuoteCommand.class
 com/timeist/listeners/DiscordUnlinkListener.class
+com/timeist/discordcommands/TestCommand.class
 com/timeist/minecraftcommands/ArrowCommand.class
 com/timeist/database/SQLite.class
 com/timeist/PlayerFile.class

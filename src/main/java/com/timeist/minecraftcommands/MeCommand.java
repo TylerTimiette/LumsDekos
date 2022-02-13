@@ -24,9 +24,9 @@ public class MeCommand implements CommandExecutor {
         } else {
             String message = String.join(" ", args);
             message = Util.removeFormatting((Player)sender, message);
-            if (sender instanceof ConsoleCommandSender) {
+            if(!(sender instanceof Player)) {
                 Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&0(&d&lCONSOLE&0) &d&l> &r" + message));
-                return true;
+
             } else {
                 final Player player = (Player)sender;
                 final String discordActionMessage = "**(**_ACTION_**)** " + message;
@@ -51,6 +51,7 @@ public class MeCommand implements CommandExecutor {
                 return true;
             }
         }
+        return true;
     }
 
     private BaseComponent[] color(String text) {
