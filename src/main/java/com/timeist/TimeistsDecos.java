@@ -1,25 +1,26 @@
 package com.timeist;
 
-import com.timeist.discordcommands.TestCommand;
-import com.timeist.discordcommands.WhoAmICommand;
-import com.timeist.listeners.*;
-import com.timeist.minecraftcommands.ArrowCommand;
-import com.timeist.minecraftcommands.ColorCommand;
-import com.timeist.minecraftcommands.EmoteCommand;
-import com.timeist.minecraftcommands.IgnoreCommand;
-import com.timeist.minecraftcommands.LinkCommand;
-import com.timeist.minecraftcommands.MeCommand;
-import com.timeist.minecraftcommands.NickCommand;
-import com.timeist.minecraftcommands.PrefixCommand;
-import com.timeist.minecraftcommands.QuoteCommand;
-import com.timeist.minecraftcommands.SpecialChatCommand;
-import com.timeist.minecraftcommands.WebhookCommand;
+import com.timeist.discord.DiscordReadyListener;
+import com.timeist.discord.commands.WhoAmICommand;
+import com.timeist.minecraft.commands.ArrowCommand;
+import com.timeist.minecraft.commands.ColorCommand;
+import com.timeist.minecraft.commands.EmoteCommand;
+import com.timeist.minecraft.commands.IgnoreCommand;
+import com.timeist.minecraft.commands.LinkCommand;
+import com.timeist.minecraft.commands.MeCommand;
+import com.timeist.minecraft.commands.NickCommand;
+import com.timeist.minecraft.commands.PrefixCommand;
+import com.timeist.minecraft.commands.QuoteCommand;
+import com.timeist.minecraft.commands.SpecialChatCommand;
+import com.timeist.minecraft.botrelated.WebhookCommand;
 import com.timeist.database.Database;
 import com.timeist.database.SQLite;
 import com.timeist.handlers.BrandHandler;
 
 import java.util.Objects;
 
+import com.timeist.minecraft.listeners.*;
+import com.timeist.utilities.Util;
 import github.scarsz.discordsrv.DiscordSRV;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
@@ -104,7 +105,6 @@ public class TimeistsDecos extends JavaPlugin  {
             this.getServer().getOnlinePlayers().forEach((player) -> {
                 Util.addPlayerData(player.getUniqueId());
             });
-            this.getServer().getPluginManager().registerEvents((new DiscordChannelListener()), this);
             DiscordSRV.api.subscribe(reg);
             DiscordSRV.api.subscribe(dlink);
             DiscordSRV.api.subscribe(dunlink);
