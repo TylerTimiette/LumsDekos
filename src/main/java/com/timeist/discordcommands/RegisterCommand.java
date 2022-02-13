@@ -8,13 +8,23 @@ import github.scarsz.discordsrv.dependencies.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.entities.Emote;
 public class RegisterCommand extends ListenerAdapter {
 
-    @Subscribe @Override
+    @Subscribe
+    @Override
     public void onMessageReceived(MessageReceivedEvent e) {
         Message msg = e.getMessage();
-        if(msg.getContentRaw().equalsIgnoreCase("~~alftest")) {
+
+        String[] argsw = msg.getContentRaw().toString().split(" ");
+        if (argsw[0].equalsIgnoreCase("~~argstest")) {
             System.out.println("Valid command found, attempting to reply.");
 
-            e.getChannel().sendMessage("FUCK YOU SHUT UP I HOPE YOU DIE").queue();
+            for (int i = 1; i < argsw.length; i++) {
+                if (argsw[i].equalsIgnoreCase("")) {
+                    i++;
+                } else {
+                    e.getChannel().sendMessage("arg \"" + argsw[i] + "\" found").queue();
+                }
+
+            }
         }
     }
 }
