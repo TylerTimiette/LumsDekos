@@ -1,12 +1,19 @@
 package com.timeist.minecraft.listeners;
 
+import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import com.timeist.discord.DiscordWebhook;
 import com.timeist.utilities.PlayerData;
 import com.timeist.TimeistsDecos;
+import com.timeist.utilities.PlayerFile;
 import com.timeist.utilities.Util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import github.scarsz.discordsrv.DiscordSRV;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
+import github.scarsz.discordsrv.util.DiscordUtil;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -45,6 +52,7 @@ public class AsyncPlayerChatListener implements Listener {
         } else {
             event.setCancelled(true);
             PlayerData playerData = Util.getPlayerData(player.getUniqueId());
+            PlayerFile pf = new PlayerFile(player.getUniqueId());
             Chat chat = TimeistsDecos.getChat();
             StringBuilder sb = new StringBuilder();
             sb.append(playerData.getPrefix());
@@ -116,6 +124,29 @@ public class AsyncPlayerChatListener implements Listener {
             precursor.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, this.color("&4Name: &c" + player.getName() + "\n" + Util.translateHexColorCodes("#", playerData.getQuote()) + "\n&bClick to ignore this player!")));
             precursor.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/ignore " + player.getName()));
             Util.sendChatMessage(player.getUniqueId(), new BaseComponent[]{precursor, message});
+
+
+
+            if(pf.getConfig().getString("talk-mode").equalsIgnoreCase("both")) {
+
+                Member m = DiscordUtil.getJda().getGuilds().get(0).getMember(DiscordUtil.getJda().getUserById(DiscordSRV.getPlugin().getAccountLinkManager().getDiscordId(player.getUniqueId())));
+
+                if (DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).canTalk(m)) {
+
+                    WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
+                    WebhookMessageBuilder builder = new WebhookMessageBuilder();
+                    builder.setUsername(event.getPlayer().getName() + " // unity.exousia.online");
+                    builder.setContent(event.getMessage());
+                    builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
+                    client.send(builder.build());
+
+                }
+
+
+                }
+
+
+
         }
 
     }

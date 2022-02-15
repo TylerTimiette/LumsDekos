@@ -15,23 +15,22 @@ public class CharacterRegisterCommand implements CommandExecutor {
         if(Util.checkPlayer(sender)) {
             return true;
         } else if (Util.checkArgs(sender, args, 1, false)) {
-            sender.sendMessage("Usage: /regchar (name) (avatar) where Name is the character's name -- with no spaces -- and is what you will use to type as them later with /talk, and Avatar is an Imgur link to the desired portrait..");
+            sender.sendMessage("Usage: /regchar (name) where Name is the character's name -- with no spaces -- and is what you will use to type as them later with /talk.");
             return true;
         } else {
             Player p = (Player) sender;
                     PlayerFile pf = new PlayerFile(p.getUniqueId());
 
-                    if(args[1].startsWith("https://imgur.com/a/")) {
-
-                        if (pf.getConfig().isSet(args[0])) {
+                        if (pf.getConfig().isSet("characters." + args[0])) {
                             sender.sendMessage("That character has already been registered.");
                             return true;
                         } else {
-                           // pf.getConfig().set(args[0], );
+
+                            pf.getConfig().set("characters."+ args[0] + ".yep", "super based");
+                            p.sendMessage("Character added to player file. You may want to add an avatar using /avatar (charactername) -- please be aware that we only accept images that are stored through the Discord CDN and they must be a PNG or JPG.");
                         }
-                    } else {
-                        sender.sendMessage("Not an imgur link.");
-                    }
+
+                    pf.save();
                 }
 
 

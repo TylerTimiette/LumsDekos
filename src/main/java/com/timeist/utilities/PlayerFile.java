@@ -27,6 +27,8 @@ public class PlayerFile {
         this.config.addDefault("quote", "");
         this.config.addDefault("color", "&f");
         this.config.addDefault("connectedchannel", "&");
+        this.config.addDefault("listen-mode", "all");
+        this.config.addDefault("talk-mode", "mc");
         this.config.options().copyDefaults(true);
         this.save();
     }

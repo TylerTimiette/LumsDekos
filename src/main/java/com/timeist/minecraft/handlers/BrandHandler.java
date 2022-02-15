@@ -1,4 +1,4 @@
-package com.timeist.handlers;
+package com.timeist.minecraft.handlers;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;

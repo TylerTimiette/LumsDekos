@@ -36,10 +36,10 @@ public class WebhookCommand implements CommandExecutor {
                 }
             }
 
-            return true;
         } else {
             sender.sendMessage("Hello! You are trying to modify the webhook URL for Lum's Dekos. Unfortunately, due to security concerns, only CONSOLE can run this command. Thanks!");
             return true;
         }
+        return true;
     }
 }

@@ -20,8 +20,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class LinkCommand implements CommandExecutor {
-    public LinkCommand() {
+public class URLCommand implements CommandExecutor {
+    public URLCommand() {
     }
 
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {

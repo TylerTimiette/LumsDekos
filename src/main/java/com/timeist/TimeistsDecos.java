@@ -1,12 +1,14 @@
 package com.timeist;
 
 import com.timeist.discord.DiscordReadyListener;
-import com.timeist.discord.commands.WhoAmICommand;
+import com.timeist.discord.commands.*;
+import com.timeist.minecraft.botrelated.ChannelListenCommand;
+import com.timeist.minecraft.botrelated.ChannelListenMode;
 import com.timeist.minecraft.commands.ArrowCommand;
 import com.timeist.minecraft.commands.ColorCommand;
 import com.timeist.minecraft.commands.EmoteCommand;
 import com.timeist.minecraft.commands.IgnoreCommand;
-import com.timeist.minecraft.commands.LinkCommand;
+import com.timeist.minecraft.commands.URLCommand;
 import com.timeist.minecraft.commands.MeCommand;
 import com.timeist.minecraft.commands.NickCommand;
 import com.timeist.minecraft.commands.PrefixCommand;
@@ -15,7 +17,7 @@ import com.timeist.minecraft.commands.SpecialChatCommand;
 import com.timeist.minecraft.botrelated.WebhookCommand;
 import com.timeist.database.Database;
 import com.timeist.database.SQLite;
-import com.timeist.handlers.BrandHandler;
+import com.timeist.minecraft.handlers.BrandHandler;
 
 import java.util.Objects;
 
@@ -89,7 +91,7 @@ public class TimeistsDecos extends JavaPlugin  {
             Util.init();
             ((PluginCommand)Objects.requireNonNull(this.getCommand("me"))).setExecutor(new MeCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("nick"))).setExecutor(new NickCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("link"))).setExecutor(new LinkCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("link"))).setExecutor(new URLCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("arrow"))).setExecutor(new ArrowCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("emote"))).setExecutor(new EmoteCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("quote"))).setExecutor(new QuoteCommand());
@@ -98,16 +100,31 @@ public class TimeistsDecos extends JavaPlugin  {
             ((PluginCommand)Objects.requireNonNull(this.getCommand("color"))).setExecutor(new ColorCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("webhook"))).setExecutor(new WebhookCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("specialchat"))).setExecutor(new SpecialChatCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("channel"))).setExecutor(new ChannelListenCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("listenmode"))).setExecutor(new ChannelListenMode());
+
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("regchar"))).setExecutor(new CharacterRegisterCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("remchar"))).setExecutor(new CharacterRemoveCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("avatar"))).setExecutor(new AvatarCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("talk"))).setExecutor(new TalkCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("tmode"))).setExecutor(new TalkModeCommand());
+
+
+
+
             this.getServer().getMessenger().registerIncomingPluginChannel(this, "minecraft:brand", new BrandHandler());
             this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
             this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), this);
             this.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(this), this);
+            this.getServer().getPluginManager().registerEvents(new ChannelTextListener(), this);
             this.getServer().getOnlinePlayers().forEach((player) -> {
                 Util.addPlayerData(player.getUniqueId());
             });
             DiscordSRV.api.subscribe(reg);
             DiscordSRV.api.subscribe(dlink);
             DiscordSRV.api.subscribe(dunlink);
+
+
         }
 
     }

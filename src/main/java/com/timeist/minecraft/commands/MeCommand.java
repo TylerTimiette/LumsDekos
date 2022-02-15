@@ -21,12 +21,14 @@ public class MeCommand implements CommandExecutor {
         if (Util.checkArgs(sender, args, 1, true)) {
             return true;
         } else {
+
             String message = String.join(" ", args);
-            message = Util.removeFormatting((Player)sender, message);
             if(!(sender instanceof Player)) {
                 Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&0(&d&lCONSOLE&0) &d&l> &r" + message));
 
             } else {
+
+                message = Util.removeFormatting((Player)sender, message);
                 final Player player = (Player)sender;
                 final String discordActionMessage = "**(**_ACTION_**)** " + message;
                 Bukkit.getScheduler().runTaskAsynchronously(TimeistsDecos.getPlugin(), new Runnable() {

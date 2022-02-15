@@ -21,7 +21,7 @@ public class Util {
     public Util() {
     }
 
-    static void init() {
+    public static void init() {
         prefix = color(TimeistsDecos.getInstance().getConfig().getString("prefix"));
     }
 

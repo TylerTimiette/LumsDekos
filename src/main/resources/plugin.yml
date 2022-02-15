@@ -53,3 +53,26 @@ commands:
     description: 'Do fancy stuff'
   specialchat:
     description: 'Have fun with it.'
+  listenmode:
+    aliases: [clisten, listen]
+    description: 'Select the type of message you listen to through DiscordSRV. Values are bot, user, and all'
+  channel:
+    aliases: [channel, channelselect, chansel]
+    description: 'Select the channel of our Discord you want to listen to. It takes the ID as the value.'
+  talk:
+    aliases: [charcmd, ccmd, characteraction]
+    description: 'Get a specified character to send a message in Discord.'
+  regchar:
+    aliases: [registerchar, charregister, charreg]
+    description: 'Register a character!'
+  avatar:
+    aliases: [charavatar, charav, avchar, avatarchar]
+    description: 'Implement an avatar for a character.'
+  delchar:
+    aliases: [removechar, remchar, deletechar, killchar]
+    description: 'Delete a character from your player file.'
+  listchars:
+    description: 'Command that, when used, iterates over the config file of the sender to show them what exactly is there.'
+  tmode:
+    aliases: [talkmode, talkingmode, seltalkmode]
+    description: '/tmode (discord|minecraft|both)'
