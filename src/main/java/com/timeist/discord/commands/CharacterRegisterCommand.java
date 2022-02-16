@@ -26,7 +26,7 @@ public class CharacterRegisterCommand implements CommandExecutor {
                             return true;
                         } else {
 
-                            pf.getConfig().set("characters."+ args[0] + ".yep", "super based");
+                            pf.getConfig().set("characters."+ args[0] + ".name", args[0]);
                             p.sendMessage("Character added to player file. You may want to add an avatar using /avatar (charactername) -- please be aware that we only accept images that are stored through the Discord CDN and they must be a PNG or JPG.");
                         }
 

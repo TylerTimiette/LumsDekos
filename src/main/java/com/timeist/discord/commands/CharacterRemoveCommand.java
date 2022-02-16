@@ -23,6 +23,7 @@ public class CharacterRemoveCommand implements CommandExecutor {
             PlayerFile pf = new PlayerFile(p.getUniqueId());
 
             if (pf.getConfig().isSet("characters." + args[0])) {
+                pf.getConfig().set("characters." + args[0] + ".name", null);
                 pf.getConfig().set("characters." + args[0], null);
                 sender.sendMessage("Character has been deleted.");
                 return true;

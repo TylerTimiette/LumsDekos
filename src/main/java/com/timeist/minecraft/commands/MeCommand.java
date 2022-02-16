@@ -13,6 +13,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.net.URL;
+
 public class MeCommand implements CommandExecutor {
     public MeCommand() {
     }
@@ -33,12 +35,14 @@ public class MeCommand implements CommandExecutor {
                 final String discordActionMessage = "**(**_ACTION_**)** " + message;
                 Bukkit.getScheduler().runTaskAsynchronously(TimeistsDecos.getPlugin(), new Runnable() {
                     public void run() {
-                        DiscordWebhook hook = new DiscordWebhook();
+
+
+                        try {
+                        DiscordWebhook hook = new DiscordWebhook(new URL(TimeistsDecos.getPlugin().getConfig().getString("webhook")));
                         hook.setUsername(player.getName());
                         hook.setContent(net.md_5.bungee.api.ChatColor.stripColor(discordActionMessage.replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
                         hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
 
-                        try {
                             hook.execute();
                         } catch (Exception var3) {
                             var3.printStackTrace();

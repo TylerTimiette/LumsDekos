@@ -32,7 +32,7 @@ public class TalkCommand implements CommandExecutor {
 
                 WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
                 WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                builder.setUsername(pf.getConfig().getString("characters." + args[0]) + " // owned by " + p.getName());
+                builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name")  + p.getName());
                 builder.setContent(message);
 
 

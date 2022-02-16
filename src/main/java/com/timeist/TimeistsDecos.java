@@ -108,7 +108,7 @@ public class TimeistsDecos extends JavaPlugin  {
             ((PluginCommand)Objects.requireNonNull(this.getCommand("avatar"))).setExecutor(new AvatarCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("talk"))).setExecutor(new TalkCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("tmode"))).setExecutor(new TalkModeCommand());
-
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("listchars"))).setExecutor(new ListCharsCommand());
 
 
 

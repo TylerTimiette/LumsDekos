@@ -14,8 +14,10 @@ public class DiscordWebhook {
     private String username;
     private String displayname;
     private String avatarUrl;
+    private URL url;
 
-    public DiscordWebhook() {
+    public DiscordWebhook(URL url) {
+        this.url = url;
     }
 
     public void setContent(String content) {
@@ -43,8 +45,7 @@ public class DiscordWebhook {
             jsonObject.addProperty("username", this.username);
             jsonObject.addProperty("avatar_url", this.avatarUrl);
             if (!TimeistsDecos.url.equalsIgnoreCase("changeme") && TimeistsDecos.url.contains("discord.com/api/webhooks")) {
-                URL url = new URL(TimeistsDecos.url);
-                HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.addRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("User-Agent", "Timmy can go fuck his user agent lol");
                 connection.setDoOutput(true);

@@ -3,6 +3,7 @@ package com.timeist.minecraft.listeners;
 import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import com.timeist.TimeistsDecos;
+import com.timeist.discord.DiscordWebhook;
 import com.timeist.utilities.PlayerData;
 import com.timeist.utilities.PlayerFile;
 import com.timeist.utilities.Util;
@@ -21,6 +22,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.net.URL;
+
 public class ChannelTextListener implements Listener {
     @EventHandler(
             priority = EventPriority.HIGH
@@ -29,7 +32,7 @@ public class ChannelTextListener implements Listener {
         //They want to chat on Discord ONLY
         PlayerFile pf = new PlayerFile(event.getPlayer().getUniqueId());
         if(pf.getConfig().getString("talk-mode").equalsIgnoreCase("discord")) {
-
+            event.setCancelled(true);
 
             if (DiscordSRV.getPlugin().getAccountLinkManager().getDiscordId(event.getPlayer().getUniqueId()) != null) { /**&& pf.getConfig().getString("chat-mode").equalsIgnoreCase("discord")**/
                 //Let's check if they're muted or not.
@@ -112,7 +115,16 @@ public class ChannelTextListener implements Listener {
                     builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
                     client.send(builder.build());
 
-                    event.setCancelled(true);
+                    try {
+                        DiscordWebhook hook = new DiscordWebhook(new URL(DiscordUtil.getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl()));
+                        hook.setUsername(event.getPlayer().getName() + " // unity.exousia.online");
+                        hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
+                        hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
+                        hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
+
+                    } catch (Exception e) {
+                        System.out.println("URL was malformed.");
+                    }
 
 
                 } else

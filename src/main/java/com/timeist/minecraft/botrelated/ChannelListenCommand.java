@@ -74,6 +74,7 @@ public class ChannelListenCommand implements CommandExecutor {
     public void onSuccess(Player player, TextChannel textChannel) {
         player.sendMessage("Now listening to channel: " + textChannel.getName() + " (ID " + textChannel.getId() + ")");
 
+        System.out.println(textChannel.retrieveWebhooks().complete().get(0).getUrl());
 
         DiscordUtil.getTextChannelById(textChannel.getId()).sendMessage("Player " + player.getName() + " (" + player.getUniqueId().toString() + ") has connected to the channel!").queue();
         PlayerFile pf = new PlayerFile(player.getUniqueId());
