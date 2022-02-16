@@ -24,9 +24,14 @@ public class ListCharsCommand implements CommandExecutor {
 
             PlayerFile pf = new PlayerFile(p.getUniqueId());
 
+
+            p.sendMessage("Here are your characters according to your playerfile:");
             for(String idfk : pf.getConfig().getConfigurationSection("characters").getKeys(false)) {
                 p.sendMessage(idfk);
             }
+
+            if(pf.getConfig().getConfigurationSection("characters").getKeys(false).size() == 0)
+                p.sendMessage("You have no characters registered!");
         }
         return true;
     }

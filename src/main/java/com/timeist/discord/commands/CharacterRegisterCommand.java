@@ -21,15 +21,20 @@ public class CharacterRegisterCommand implements CommandExecutor {
             Player p = (Player) sender;
                     PlayerFile pf = new PlayerFile(p.getUniqueId());
 
+
+
+                    if(!(args[0].length() + (" // " + p.getName()).length() >= 80)) {
                         if (pf.getConfig().isSet("characters." + args[0])) {
                             sender.sendMessage("That character has already been registered.");
                             return true;
                         } else {
 
-                            pf.getConfig().set("characters."+ args[0] + ".name", args[0]);
+                            pf.getConfig().set("characters." + args[0] + ".name", args[0]);
                             p.sendMessage("Character added to player file. You may want to add an avatar using /avatar (charactername) -- please be aware that we only accept images that are stored through the Discord CDN and they must be a PNG or JPG.");
                         }
 
+                    } else
+                        sender.sendMessage("Character name is too large! When registering a character, your name can be no longer than " + (80 - (" // " + p.getName()).length()) + " characters, as Discord will not accept the request if the total is over 80 characters. Sorry for any inconvenience.");
                     pf.save();
                 }
 

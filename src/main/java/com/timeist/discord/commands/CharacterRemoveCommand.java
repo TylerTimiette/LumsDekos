@@ -26,6 +26,7 @@ public class CharacterRemoveCommand implements CommandExecutor {
                 pf.getConfig().set("characters." + args[0] + ".name", null);
                 pf.getConfig().set("characters." + args[0], null);
                 sender.sendMessage("Character has been deleted.");
+                pf.save();
                 return true;
             } else {
                 p.sendMessage("That character does not exist in your playerfile!");

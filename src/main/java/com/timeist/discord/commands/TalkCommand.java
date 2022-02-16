@@ -22,7 +22,7 @@ public class TalkCommand implements CommandExecutor {
             return true;
         } else {
 
-            String message = String.join(" ", args.toString().replace(args[0] + " ", ""));
+            String message = String.join(" ", args);
 
             Player p = (Player) sender;
             PlayerFile pf = new PlayerFile(p.getUniqueId());
@@ -32,8 +32,8 @@ public class TalkCommand implements CommandExecutor {
 
                 WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
                 WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name")  + p.getName());
-                builder.setContent(message);
+                builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name") + " // Owner: "  + p.getName());
+                builder.setContent(message.replace(args[0] + " ", ""));
 
 
                 if(pf.getConfig().isSet("characters." + args[0] + ".avatar"))
@@ -43,6 +43,8 @@ public class TalkCommand implements CommandExecutor {
 
 
                 client.send(builder.build());
+            } else {
+                p.sendMessage("That character doesn't exist! Are you sure that you typed their name properly?");
             }
 
 
