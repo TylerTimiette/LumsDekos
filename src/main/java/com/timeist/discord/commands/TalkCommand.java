@@ -2,9 +2,11 @@ package com.timeist.discord.commands;
 
 import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
+import com.timeist.TimeistsDecos;
 import com.timeist.utilities.PlayerFile;
 import com.timeist.utilities.Util;
 import github.scarsz.discordsrv.util.DiscordUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,19 +33,24 @@ public class TalkCommand implements CommandExecutor {
 
             if(pf.getConfig().isSet("characters." + args[0])) {
 
-                WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
-                WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name") + " // Owner: "  + p.getName());
-                builder.setContent(message.replace(args[0] + " ", "").replaceAll("@everyone", ""));
+                Bukkit.getScheduler().runTaskAsynchronously(TimeistsDecos.getPlugin(), new Runnable() {
+                    public void run() {
+
+                        WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
+                        WebhookMessageBuilder builder = new WebhookMessageBuilder();
+                        builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name") + " // Owner: " + p.getName());
+                        builder.setContent(message.replace(args[0] + " ", "").replaceAll("@everyone", ""));
 
 
-                if(pf.getConfig().isSet("characters." + args[0] + ".avatar"))
-                    builder.setAvatarUrl(pf.getConfig().getString("characters." + args[0] + ".avatar"));
-                else
-                    builder.setAvatarUrl("https://cdn.discordapp.com/embed/avatars/0.png");
+                        if (pf.getConfig().isSet("characters." + args[0] + ".avatar"))
+                            builder.setAvatarUrl(pf.getConfig().getString("characters." + args[0] + ".avatar"));
+                        else
+                            builder.setAvatarUrl("https://cdn.discordapp.com/embed/avatars/0.png");
 
 
-                client.send(builder.build());
+                        client.send(builder.build());
+                    };
+                });
             } else {
                 p.sendMessage("That character doesn't exist! Are you sure that you typed their name properly?");
             }
