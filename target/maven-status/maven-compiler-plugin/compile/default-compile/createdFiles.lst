@@ -23,6 +23,7 @@ com/timeist/discord/commands/CharacterRegisterCommand.class
 com/timeist/minecraft/listeners/PlayerJoinListener.class
 com/timeist/minecraft/commands/EmoteCommand.class
 com/timeist/utilities/PlayerFile.class
+com/timeist/minecraft/listeners/PlayerJoinListener$1.class
 com/timeist/minecraft/commands/NickCommand.class
 com/timeist/TimeistsDecos.class
 com/timeist/minecraft/commands/URLCommand.class

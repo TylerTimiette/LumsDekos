@@ -48,8 +48,7 @@ public class DiscordChannelListener extends ListenerAdapter {
 
                             if (pf.getConfig().get("listen-mode").equals("users") && !event.getAuthor().isBot())
                                 target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a&l" + event.getMessage().getAuthor().getName() + " &2&l//&a&l " + m2.getNickname() + "&7&l >> &f" + event.getMessage().getContentRaw()));
-                        } else
-                            System.out.println("Some weird bug.");
+                        }
 
                     } else {
                         pf.getConfig().set("connectedchannel", "&");

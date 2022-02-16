@@ -9,6 +9,7 @@ import java.util.UUID;
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
 import github.scarsz.discordsrv.util.DiscordUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -46,7 +47,19 @@ try {
 
 
                 if (!pf.getConfig().getString("connectedchannel").equalsIgnoreCase("&"))
-                    event.getPlayer().sendMessage("Currently connected to Discord channel with ID " + pf.getConfig().getString("connectedchannel") + " (" + DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).getName() + ")");
+
+
+                    Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(TimeistsDecos.getPlugin(), new Runnable(){
+                        public void run(){
+                            event.getPlayer().sendMessage("Currently connected to Discord channel with ID " + pf.getConfig().getString("connectedchannel") + " (" + DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).getName() + ")");
+                            event.getPlayer().sendMessage(("Talking mode set to ") + pf.getConfig().getString("talk-mode").toUpperCase());
+                            event.getPlayer().sendMessage(("Listening mode set to ") + pf.getConfig().getString("listen-mode").toUpperCase());
+                        }
+                    }, 3*20);
+
+
+
+
             } else
                 pf.getConfig().set("connectedchannel", "&");
         }
