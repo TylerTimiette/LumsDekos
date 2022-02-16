@@ -6,6 +6,7 @@ com/timeist/minecraft/listeners/DiscordUnlinkListener.class
 com/timeist/minecraft/botrelated/ChannelListenCommand.class
 com/timeist/minecraft/listeners/AsyncPlayerChatListener.class
 com/timeist/minecraft/listeners/DiscordChannelListener.class
+com/timeist/discord/commands/TalkCommand$1.class
 com/timeist/minecraft/listeners/ChannelTextListener.class
 com/timeist/minecraft/commands/MeCommand.class
 com/timeist/minecraft/botrelated/ChannelListenMode.class

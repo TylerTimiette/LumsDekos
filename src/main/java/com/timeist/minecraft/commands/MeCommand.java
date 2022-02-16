@@ -38,7 +38,7 @@ public class MeCommand implements CommandExecutor {
 
 
                         try {
-                        DiscordWebhook hook = new DiscordWebhook(new URL(TimeistsDecos.getPlugin().getConfig().getString("webhook")));
+                        DiscordWebhook hook = new DiscordWebhook(new URL(TimeistsDecos.url));
                         hook.setUsername(player.getName());
                         hook.setContent(net.md_5.bungee.api.ChatColor.stripColor(discordActionMessage.replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
                         hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");

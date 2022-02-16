@@ -5,6 +5,8 @@ import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import com.timeist.TimeistsDecos;
 import com.timeist.utilities.PlayerFile;
 import com.timeist.utilities.Util;
+import github.scarsz.discordsrv.DiscordSRV;
+import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -33,24 +35,45 @@ public class TalkCommand implements CommandExecutor {
 
             if(pf.getConfig().isSet("characters." + args[0])) {
 
-                Bukkit.getScheduler().runTaskAsynchronously(TimeistsDecos.getPlugin(), new Runnable() {
-                    public void run() {
-
-                        WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
-                        WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                        builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name") + " // Owner: " + p.getName());
-                        builder.setContent(message.replace(args[0] + " ", "").replaceAll("@everyone", ""));
 
 
-                        if (pf.getConfig().isSet("characters." + args[0] + ".avatar"))
-                            builder.setAvatarUrl(pf.getConfig().getString("characters." + args[0] + ".avatar"));
-                        else
-                            builder.setAvatarUrl("https://cdn.discordapp.com/embed/avatars/0.png");
+                Member m = DiscordUtil.getJda().getGuilds().get(0).getMember(DiscordUtil.getJda().getUserById(DiscordSRV.getPlugin().getAccountLinkManager().getDiscordId(p.getUniqueId())));
 
 
-                        client.send(builder.build());
-                    };
-                });
+                //If the channel is a staff channel, do XYZ to ensure that they actually have access.
+                if (DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).canTalk(m)) {
+
+
+                    Bukkit.getScheduler().runTaskAsynchronously(TimeistsDecos.getPlugin(), new Runnable() {
+                        public void run() {
+
+                            try {
+
+                                WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
+                                WebhookMessageBuilder builder = new WebhookMessageBuilder();
+                                builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name") + " // Owner: " + p.getName());
+                                builder.setContent(message.replace(args[0] + " ", "").replaceAll("@", ""));
+
+
+                                if (pf.getConfig().isSet("characters." + args[0] + ".avatar"))
+                                    builder.setAvatarUrl(pf.getConfig().getString("characters." + args[0] + ".avatar"));
+                                else
+                                    builder.setAvatarUrl("https://cdn.discordapp.com/embed/avatars/0.png");
+
+
+                                client.send(builder.build());
+                            } catch(IllegalStateException e) {
+                                p.sendMessage("Message cannot be empty!");
+                            }
+                        }
+
+                        ;
+                    });
+                } else {
+                    p.sendMessage("You can't access this channel! Removing value from config.");
+                    pf.getConfig().set("connectedchannel", "&");
+                    pf.save();
+                }
             } else {
                 p.sendMessage("That character doesn't exist! Are you sure that you typed their name properly?");
             }

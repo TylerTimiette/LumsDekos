@@ -34,11 +34,10 @@ public class TalkModeCommand implements CommandExecutor {
                         if (pf.getConfig().isSet("connectedchannel")) {
                             pf.getConfig().set("talk-mode", "discord");
                             p.sendMessage("Talking mode set to DISCORD");
-                            break;
                         } else {
                             p.sendMessage("You aren't connected to a channel! Run /channel to connect!");
-                            break;
                         }
+                        break;
 
 
                     case "both":
