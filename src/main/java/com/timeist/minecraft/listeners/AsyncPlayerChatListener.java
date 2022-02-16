@@ -118,7 +118,7 @@ public class AsyncPlayerChatListener implements Listener {
                 }
 
                 try {
-                DiscordWebhook hook = new DiscordWebhook(new URL(DiscordUtil.getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl()));
+                DiscordWebhook hook = new DiscordWebhook(new URL(TimeistsDecos.getPlugin().getConfig().getString("webhook")));
                 hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName()));
                 hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
                 hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));

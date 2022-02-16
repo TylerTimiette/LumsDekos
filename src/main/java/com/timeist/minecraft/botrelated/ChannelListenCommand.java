@@ -42,25 +42,24 @@ public class ChannelListenCommand implements CommandExecutor {
 
 
                             //If the channel is a staff channel, do XYZ to ensure that they actually have access.
-                            if (DiscordUtil.getJda().getTextChannelById(args[0]).getParent().getName().contains("STAFF")) {
-                                if (DiscordUtil.getJda().getTextChannelById(args[0]).canTalk(m)) {
+                            if (DiscordUtil.getJda().getTextChannelById(args[0]).canTalk(m)) {
+
+
+
                                     //This is a security measure. If someone's not where they're supposed to be, staff can tell.
                                     onSuccess(player, DiscordUtil.getJda().getTextChannelById(args[0]));
                                     return true;
-                                } else {
-                                    onFailure(player, "You are not able to access this channel!");
-                                    return true;
-                                }
-                            }
+
+                            } else {
+                            onFailure(player, "You are not able to access this channel!");
+                            return true;
+                        }
 
                         } else {
                             onFailure(player, "You are already connected to this channel, as it is game-chat.");
                             return true;
                         }
 
-
-
-                        onSuccess(player, DiscordUtil.getJda().getTextChannelById(args[0]));
                     } else
                         onFailure(player, "Channel does not exist! If you believe this is in error, right click the channel in question and copy its ID; the plugin does not check for channel names and uses channel IDs as the arg.\n\nAdditionally, this plugin does not support threads.");
                 } else
