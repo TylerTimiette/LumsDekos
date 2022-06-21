@@ -1,11 +1,11 @@
-name: TimeistsDekos
-version: 1.15.2
+name: LumsDekos
+version: 1.19
 description: A decorative plugin.
 authors: [Gadse, Timiette]
 depend: [Vault, DiscordSRV]
 
 
-main: com.timeist.TimeistsDecos
+main: com.lum.LumsDekos
 api-version: 1.14
 
 commands:

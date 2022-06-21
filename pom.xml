@@ -37,7 +37,7 @@
 
     <properties>
         <author>Lum</author>
-        <mainClass>com.timeist.TimeistsDecos</mainClass>
+        <mainClass>com.lum.LumsDekos</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -104,7 +104,7 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
+                <atimeistrtifactId>maven-shade-plugin</atimeistrtifactId>
                 <version>2.4.3</version>
                 <executions>
                     <execution>
@@ -138,8 +138,8 @@
         </repository>
 
         <repository>
-            <id>destroystokyo-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public//</url>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
 
 
@@ -157,9 +157,9 @@
 
 
         <dependency>
-            <groupId>com.destroystokyo.paper</groupId>
+            <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
