@@ -24,6 +24,7 @@ import java.util.Objects;
 import com.lum.minecraft.listeners.*;
 import com.lum.utilities.Util;
 import github.scarsz.discordsrv.DiscordSRV;
+import github.scarsz.discordsrv.util.DiscordUtil;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.PluginCommand;
@@ -43,6 +44,11 @@ public class LumsDekos extends JavaPlugin  {
     private DiscordReadyListener reg = new DiscordReadyListener();
     private DiscordLinkListener dlink = new DiscordLinkListener();
     private DiscordUnlinkListener dunlink = new DiscordUnlinkListener();
+
+    private static DiscordReadyListener statreg = new DiscordReadyListener();
+    private static DiscordLinkListener statdlink = new DiscordLinkListener();
+    private static DiscordUnlinkListener statdunlink = new DiscordUnlinkListener();
+
     private WhoAmICommand whois = new WhoAmICommand();
 
     public LumsDekos() {
@@ -64,7 +70,13 @@ public class LumsDekos extends JavaPlugin  {
 
     public Database getTupperdb() { return this.tupperdb; }
 
-    public void onEnable() {
+    public static void main(String[] args) {
+        DiscordSRV.api.subscribe(statreg);
+        DiscordSRV.api.subscribe(statdlink);
+        DiscordSRV.api.subscribe(statdunlink);
+    }
+
+   public void onEnable() {
         this.getLogger().info("Lum's Dekos project started on 1/27/18. It is developed & maintained by Timiette.");
         if((this.getServer().getPluginManager().getPlugin("PermissionsEx") == null) && (this.getServer().getPluginManager().getPlugin("LuckPerms") == null)) {
             this.getLogger().warning("There's no permission plugin installed! Disabling plugin now\n(You should be using LuckPerms or PEx. If either of these are present, do you have Vault installed?");
