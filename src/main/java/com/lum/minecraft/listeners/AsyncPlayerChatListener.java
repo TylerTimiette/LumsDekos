@@ -131,7 +131,7 @@ public class AsyncPlayerChatListener implements Listener {
 
                 TextComponent precursor = new TextComponent(this.color(Util.translateHexColorCodes("#", sb.toString())));
                 TextComponent message = new TextComponent(this.color(Util.translateHexColorCodes("#", messagecheck)));
-                precursor.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, this.color("&4Name: &c" + player.getName() + "\n" + "Rank:" + VaultHook.getPrimaryGroup(player) + "\n" + Util.translateHexColorCodes("#", playerData.getQuote()) + "\n&bClick to ignore this player!")));
+                precursor.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, this.color("&4Name: &c" + player.getName() + "\n" + "&4Rank: &c" + VaultHook.getPrimaryGroup(player) + "\n" + Util.translateHexColorCodes("#", playerData.getQuote()) + "\n&bClick to ignore this player!")));
                 precursor.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/ignore " + player.getName()));
                 Util.sendChatMessage(player.getUniqueId(), new BaseComponent[]{precursor, message});
 
