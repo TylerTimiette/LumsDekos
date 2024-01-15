@@ -144,7 +144,7 @@ public class AsyncPlayerChatListener implements Listener {
 
                         WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
                         WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                        builder.setUsername(event.getPlayer().getName() + " // unity.exousia.online");
+                    builder.setUsername(event.getPlayer().getName() + " // " + plugin.getConfig().getString("hostname"));
                         builder.setContent(event.getMessage().replaceAll("@", "#"));
                         builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
                         client.send(builder.build());

@@ -96,6 +96,7 @@ public class LumsDekos extends JavaPlugin  {
             this.getConfig().options().copyDefaults(true);
             this.getConfig().addDefault("webhook", "CHANGEME");
             this.getConfig().addDefault("link-logging", "changeme");
+            this.getConfig().addDefault("hostname", "changeme hostname");
             this.saveConfig();
 
 
