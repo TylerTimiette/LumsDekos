@@ -25,8 +25,10 @@ import com.lum.minecraft.listeners.*;
 import com.lum.utilities.Util;
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.util.DiscordUtil;
+import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -89,6 +91,11 @@ public class LumsDekos extends JavaPlugin  {
                 this.getLogger().info("Failed to create the LumsDekos folder. Check your read/write settings.");
             }
 
+            RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+            if (provider != null) {
+                LuckPerms api = provider.getProvider();
+
+            }
 
             this.setupPermissions();
             this.getConfig().addDefault("maxLength", 25);
@@ -174,6 +181,7 @@ public class LumsDekos extends JavaPlugin  {
     public void addPerm(String perm, Player player) {
         this.permission.playerAdd((String)null, player, perm);
     }
+
 
     public static Chat getChat() {
         return chat;

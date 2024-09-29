@@ -11,12 +11,14 @@ import com.lum.utilities.Util;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
 import github.scarsz.discordsrv.hooks.VaultHook;
 import github.scarsz.discordsrv.util.DiscordUtil;
+import net.luckperms.api.LuckPermsProvider;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -125,16 +127,14 @@ public class AsyncPlayerChatListener implements Listener {
                 hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
                 hook.execute();
                 } catch (Exception var10) {
-                    var10.printStackTrace();
-                    System.out.println("You borked it!");
+                    System.out.println("Webhook integration failed.");
                 }
 
                 TextComponent precursor = new TextComponent(this.color(Util.translateHexColorCodes("#", sb.toString())));
                 TextComponent message = new TextComponent(this.color(Util.translateHexColorCodes("#", messagecheck)));
-                precursor.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, this.color("&4Name: &c" + player.getName() + "\n" + "&4Rank: &c" + VaultHook.getPrimaryGroup(player) + "\n" + Util.translateHexColorCodes("#", playerData.getQuote()) + "\n&bClick to ignore this player!")));
+                precursor.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, this.color("&4Name: &c" + player.getName() + "\n" + "&4Rank: &c" + Objects.requireNonNull(LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId())).getPrimaryGroup() + "\n" + Util.translateHexColorCodes("#", playerData.getQuote()) + "\n&bClick to ignore this player!")));
                 precursor.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/ignore " + player.getName()));
                 Util.sendChatMessage(player.getUniqueId(), new BaseComponent[]{precursor, message});
-
 
                 if (pf.getConfig().getString("talk-mode").equalsIgnoreCase("both")) {
 
