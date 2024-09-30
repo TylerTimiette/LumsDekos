@@ -53,6 +53,7 @@ public abstract class Database {
                 playerData.setSuffix(resultSet.getString("suffix"));
                 playerData.setMarker(resultSet.getString("marker"));
                 playerData.setQuote(resultSet.getString("quote"));
+                playerData.setColor(resultSet.getString("color"));
                 List<String> ignoredPlayers = new ArrayList(Arrays.asList(resultSet.getString("ignored").split(",")));
                 ignoredPlayers.removeIf(String::isEmpty);
                 playerData.setIgnoredPlayers(ignoredPlayers);
@@ -74,7 +75,7 @@ public abstract class Database {
 
         try {
             this.connection = this.getSQLConnection();
-            preparedStatement = this.connection.prepareStatement("INSERT OR REPLACE INTO `players` (uuid, prefix, nickname, suffix, marker, quote, ignored) VALUES (?,?,?,?,?,?,?);");
+            preparedStatement = this.connection.prepareStatement("INSERT OR REPLACE INTO `players` (uuid, prefix, nickname, suffix, marker, quote, ignored, color) VALUES (?,?,?,?,?,?,?,?);");
             preparedStatement.setString(1, playerData.getUuid().toString());
             preparedStatement.setString(2, playerData.getPrefix());
             preparedStatement.setString(3, playerData.getNickname());
@@ -82,6 +83,7 @@ public abstract class Database {
             preparedStatement.setString(5, playerData.getMarker());
             preparedStatement.setString(6, playerData.getQuote());
             preparedStatement.setString(7, String.join(",", playerData.getIgnoredPlayers()));
+            preparedStatement.setString(8, playerData.getColor());
             preparedStatement.executeUpdate();
         } catch (SQLException var7) {
             this.instance.getLogger().log(Level.SEVERE, "There has been an error executing the statement.", var7);

@@ -121,7 +121,7 @@ public class AsyncPlayerChatListener implements Listener {
 
                 try {
                 DiscordWebhook hook = new DiscordWebhook(new URL(LumsDekos.url));
-                hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName()));
+                hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
                 hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
                 hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
                 hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
@@ -144,7 +144,7 @@ public class AsyncPlayerChatListener implements Listener {
 
                         WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
                         WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                    builder.setUsername(event.getPlayer().getName() + " // " + plugin.getConfig().getString("hostname"));
+                        builder.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
                         builder.setContent(event.getMessage().replaceAll("@", "#"));
                         builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
                         client.send(builder.build());

@@ -48,7 +48,7 @@ public class SQLite extends Database {
 
         try {
             Statement s = this.connection.createStatement();
-            String SQLiteCreatePlayerTable = "CREATE TABLE IF NOT EXISTS players (`uuid` varchar NOT NULL,`prefix` varchar NOT NULL,`nickname` varchar NOT NULL,`suffix` varchar NOT NULL,`marker` varchar NOT NULL,`quote` varchar NOT NULL,`ignored` varchar NOT NULL,UNIQUE(uuid));";
+            String SQLiteCreatePlayerTable = "CREATE TABLE IF NOT EXISTS players (`uuid` varchar NOT NULL,`prefix` varchar NOT NULL,`nickname` varchar NOT NULL,`suffix` varchar NOT NULL,`marker` varchar NOT NULL,`quote` varchar NOT NULL,`ignored` varchar NOT NULL,'color' varchar NOT NULL,UNIQUE(uuid));";
             s.executeUpdate(SQLiteCreatePlayerTable);
             s.close();
         } catch (SQLException var3) {
