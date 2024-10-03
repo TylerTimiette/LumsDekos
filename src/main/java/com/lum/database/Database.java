@@ -38,7 +38,7 @@ public abstract class Database {
     }
 
     public PlayerData getPlayerData(UUID uuid) {
-        PlayerData playerData = new PlayerData(uuid, "", "", "", "&7", "", "", new ArrayList());
+        PlayerData playerData = new PlayerData(uuid, "", "", "", "&7", "", "", new ArrayList<>());
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
@@ -54,13 +54,12 @@ public abstract class Database {
                 playerData.setMarker(resultSet.getString("marker"));
                 playerData.setQuote(resultSet.getString("quote"));
                 playerData.setColor(resultSet.getString("color"));
-                List<String> ignoredPlayers = new ArrayList(Arrays.asList(resultSet.getString("ignored").split(",")));
+                List<String> ignoredPlayers = new ArrayList<>(Arrays.asList(resultSet.getString("ignored").split(",")));
                 ignoredPlayers.removeIf(String::isEmpty);
                 playerData.setIgnoredPlayers(ignoredPlayers);
             }
 
-            PlayerData var6 = playerData;
-            return var6;
+            return playerData;
         } catch (SQLException var10) {
             this.instance.getLogger().log(Level.SEVERE, "There has been an error executing the statement.", var10);
         } finally {
