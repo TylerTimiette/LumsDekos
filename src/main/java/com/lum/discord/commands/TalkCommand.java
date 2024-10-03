@@ -28,6 +28,12 @@ public class TalkCommand implements CommandExecutor {
 
             String message = String.join(" ", args);
 
+            StringBuilder content = new StringBuilder();
+
+            for(int i = 1; i < args.length; i++) {
+                content.append(args[i] + " ");
+            }
+
             Player p = (Player) sender;
             PlayerFile pf = new PlayerFile(p.getUniqueId());
 
@@ -52,7 +58,7 @@ public class TalkCommand implements CommandExecutor {
                                 WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
                                 WebhookMessageBuilder builder = new WebhookMessageBuilder();
                                 builder.setUsername(pf.getConfig().getString("characters." + args[0] + ".name") + " // Owner: " + p.getName());
-                                builder.setContent(message.replace(args[0] + " ", "").replaceAll("@", ""));
+                                builder.setContent(content.toString().replaceAll("@", ""));
 
 
                                 if (pf.getConfig().isSet("characters." + args[0] + ".avatar"))

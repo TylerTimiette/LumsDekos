@@ -139,22 +139,26 @@ public class LumsDekos extends JavaPlugin  {
                 Util.addPlayerData(player.getUniqueId());
             });
             if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
+                getLogger().info("DiscordSRV detected! Enabling support.");
                 DiscordSRV.api.subscribe(reg);
                 DiscordSRV.api.subscribe(dlink);
                 DiscordSRV.api.subscribe(dunlink);
                 //DiscordSRV.api.subscribe(dmessr);
                 DiscordSRV.api.subscribe(whois);
-            }
+            } else getLogger().warning("DiscordSRV not detected. To make the most of this plugin, we would recommend installing it!");
         }
 
     }
 
     public void onDisable() {
-        DiscordSRV.api.unsubscribe(reg);
-        DiscordSRV.api.unsubscribe(dlink);
-        DiscordSRV.api.unsubscribe(dunlink);
-      // DiscordSRV.api.unsubscribe(dmessr);
-        DiscordSRV.api.unsubscribe(whois);
+        //If DiscordSRV is enabled, we need to unsubscribe from its API calls. This is a dirty way to do that.
+        try {
+            DiscordSRV.api.unsubscribe(reg);
+            DiscordSRV.api.unsubscribe(dlink);
+            DiscordSRV.api.unsubscribe(dunlink);
+            // DiscordSRV.api.unsubscribe(dmessr);
+            DiscordSRV.api.unsubscribe(whois);
+        } catch(Exception e) {}
     }
 
     private boolean setupVault() {
