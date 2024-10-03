@@ -36,19 +36,19 @@ public class MeCommand implements CommandExecutor {
                 Bukkit.getScheduler().runTaskAsynchronously(LumsDekos.getPlugin(), new Runnable() {
                     public void run() {
 
+                        if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
+                            try {
+                                DiscordWebhook hook = new DiscordWebhook(new URL(LumsDekos.url));
+                                hook.setUsername(player.getName());
+                                hook.setContent(net.md_5.bungee.api.ChatColor.stripColor(discordActionMessage.replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
+                                hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
 
-                        try {
-                        DiscordWebhook hook = new DiscordWebhook(new URL(LumsDekos.url));
-                        hook.setUsername(player.getName());
-                        hook.setContent(net.md_5.bungee.api.ChatColor.stripColor(discordActionMessage.replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
-                        hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
-
-                            hook.execute();
-                        } catch (Exception var3) {
-                            var3.printStackTrace();
-                            System.out.println("You borked it!");
+                                hook.execute();
+                            } catch (Exception var3) {
+                                var3.printStackTrace();
+                                System.out.println("You borked it!");
+                            }
                         }
-
                     }
                 });
                 message = ChatColor.translateAlternateColorCodes('&', "&d&l(&5ACTION&d&l) " + player.getDisplayName() + "&0: &d" + message);
