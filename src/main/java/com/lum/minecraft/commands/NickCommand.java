@@ -19,7 +19,7 @@ public class NickCommand implements CommandExecutor {
         } else if (Util.checkArgs(sender, args, 1, true)) {
             return true;
         } else if (args[0].equalsIgnoreCase("setInt")) {
-            if (!Util.checkPerms(sender, "mn.setInt")) {
+            if(!Util.checkPerms(sender, "mn.setInt")) {
                 return true;
             } else {
                 try {

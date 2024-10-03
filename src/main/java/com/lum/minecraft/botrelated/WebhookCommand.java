@@ -29,7 +29,6 @@ public class WebhookCommand implements CommandExecutor {
                     LumsDekos.getInstance().getConfig().set("webhook", args[0]);
                     LumsDekos.getInstance().saveConfig();
                     sender.sendMessage("Set webhook address to " + args[0]);
-                    LumsDekos.getInstance();
                     LumsDekos.url = args[0];
                 } else {
                     sender.sendMessage("This is not a valid Discord Webhook.");

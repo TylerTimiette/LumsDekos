@@ -21,7 +21,7 @@ public class DiscordReadyListener {
 
 
         for(TextChannel channel : DiscordUtil.getJda().getTextChannels()) {
-            if(channel.retrieveWebhooks().complete().size() < 1) {
+            if(channel.retrieveWebhooks().complete().isEmpty()) {
                 channel.createWebhook("JDA Default").queue();
                 LumsDekos.getPlugin().getLogger().info("Applicable webhook not found for channel " + channel.getName() + " (" + channel.getId() + ") \nPlease check after server is loaded for hook 'JDA DEFAULT'");
             }

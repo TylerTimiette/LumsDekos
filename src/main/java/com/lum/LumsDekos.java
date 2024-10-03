@@ -25,7 +25,6 @@ import java.util.Objects;
 import com.lum.minecraft.listeners.*;
 import com.lum.utilities.Util;
 import github.scarsz.discordsrv.DiscordSRV;
-import github.scarsz.discordsrv.util.DiscordUtil;
 import net.luckperms.api.LuckPerms;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;

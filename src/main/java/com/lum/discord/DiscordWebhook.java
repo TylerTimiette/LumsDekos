@@ -12,7 +12,6 @@ import javax.net.ssl.HttpsURLConnection;
 public class DiscordWebhook {
     private String content;
     private String username;
-    private String displayname;
     private String avatarUrl;
     private URL url;
 
@@ -33,7 +32,6 @@ public class DiscordWebhook {
     }
 
     public void setDisplayname(String displayname) {
-        this.displayname = displayname;
     }
 
     public void execute() throws IOException {
@@ -44,7 +42,7 @@ public class DiscordWebhook {
             jsonObject.addProperty("content", this.content);
             jsonObject.addProperty("username", this.username);
             jsonObject.addProperty("avatar_url", this.avatarUrl);
-            if (!LumsDekos.url.equalsIgnoreCase("changeme") && LumsDekos.url.contains("discord.com/api/webhooks")) {
+            if (LumsDekos.url.contains("discord.com/api/webhooks")) {
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.addRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("User-Agent", "Timmy can go fuck his user agent lol");

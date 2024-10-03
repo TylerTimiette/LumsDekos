@@ -30,7 +30,7 @@ public class ListCharsCommand implements CommandExecutor {
                 p.sendMessage(idfk);
             }
 
-            if(pf.getConfig().getConfigurationSection("characters").getKeys(false).size() == 0)
+            if(pf.getConfig().getConfigurationSection("characters").getKeys(false).isEmpty())
                 p.sendMessage("You have no characters registered!");
         }
         return true;

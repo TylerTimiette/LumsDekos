@@ -26,12 +26,10 @@ public class TalkCommand implements CommandExecutor {
             return true;
         } else {
 
-            String message = String.join(" ", args);
-
             StringBuilder content = new StringBuilder();
 
             for(int i = 1; i < args.length; i++) {
-                content.append(args[i] + " ");
+                content.append(args[i]).append(" ");
             }
 
             Player p = (Player) sender;

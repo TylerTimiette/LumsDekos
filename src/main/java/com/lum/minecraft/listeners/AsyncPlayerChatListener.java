@@ -16,7 +16,6 @@ import java.util.UUID;
 
 import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.Member;
-import github.scarsz.discordsrv.hooks.VaultHook;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import net.luckperms.api.LuckPermsProvider;
 import net.md_5.bungee.api.ChatColor;
@@ -36,9 +35,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class AsyncPlayerChatListener implements Listener {
     private final LumsDekos plugin;
-    private final List<UUID> partyChat = new ArrayList();
-    private final List<UUID> sctChat = new ArrayList();
-    private List<UUID> marryChat = new ArrayList();
+    private final List<UUID> partyChat = new ArrayList<>();
+    private final List<UUID> sctChat = new ArrayList<>();
+    private List<UUID> marryChat = new ArrayList<>();
 
     public AsyncPlayerChatListener(LumsDekos plugin) {
         this.plugin = plugin;
