@@ -17,7 +17,7 @@ public class ListCharsCommand implements CommandExecutor {
         if (Util.checkPlayer(sender)) {
             return true;
         } else if (Util.checkArgs(sender, args, 0, false)) {
-            sender.sendMessage("Usage: /dumpconfig");
+            sender.sendMessage("Usage: /listchars");
             return true;
         } else {
             Player p = (Player) sender;
