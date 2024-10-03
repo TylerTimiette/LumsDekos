@@ -1,5 +1,6 @@
 package com.lum;
 
+import com.lum.discord.DiscordMessageReceived;
 import com.lum.discord.DiscordReadyListener;
 import com.lum.discord.commands.*;
 import com.lum.minecraft.botrelated.ChannelListenCommand;
@@ -46,10 +47,7 @@ public class LumsDekos extends JavaPlugin  {
     private DiscordReadyListener reg = new DiscordReadyListener();
     private DiscordLinkListener dlink = new DiscordLinkListener();
     private DiscordUnlinkListener dunlink = new DiscordUnlinkListener();
-
-    private static DiscordReadyListener statreg = new DiscordReadyListener();
-    private static DiscordLinkListener statdlink = new DiscordLinkListener();
-    private static DiscordUnlinkListener statdunlink = new DiscordUnlinkListener();
+    private DiscordMessageReceived dmessr = new DiscordMessageReceived();
 
     private WhoAmICommand whois = new WhoAmICommand();
 
@@ -72,11 +70,7 @@ public class LumsDekos extends JavaPlugin  {
 
     public Database getTupperdb() { return this.tupperdb; }
 
-    public static void main(String[] args) {
-        DiscordSRV.api.subscribe(statreg);
-        DiscordSRV.api.subscribe(statdlink);
-        DiscordSRV.api.subscribe(statdunlink);
-    }
+
 
    public void onEnable() {
         this.getLogger().info("Lum's Dekos project started on 1/27/18. It is developed & maintained by Timiette.");
@@ -147,8 +141,8 @@ public class LumsDekos extends JavaPlugin  {
             DiscordSRV.api.subscribe(reg);
             DiscordSRV.api.subscribe(dlink);
             DiscordSRV.api.subscribe(dunlink);
-
-
+            //DiscordSRV.api.subscribe(dmessr);
+            DiscordSRV.api.subscribe(whois);
         }
 
     }
@@ -157,6 +151,8 @@ public class LumsDekos extends JavaPlugin  {
         DiscordSRV.api.unsubscribe(reg);
         DiscordSRV.api.unsubscribe(dlink);
         DiscordSRV.api.unsubscribe(dunlink);
+      // DiscordSRV.api.unsubscribe(dmessr);
+        DiscordSRV.api.unsubscribe(whois);
     }
 
     private boolean setupVault() {

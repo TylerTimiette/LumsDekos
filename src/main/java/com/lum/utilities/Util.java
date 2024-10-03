@@ -1,5 +1,8 @@
 package com.lum.utilities;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -130,6 +133,15 @@ public class Util {
         } else {
             Matcher m = p.matcher(toValidate);
             return m.matches();
+        }
+    }
+
+    public static String replaceValidURL(String potentialUrl) {
+        try {
+            new URL(potentialUrl).toURI();
+            return "(link)";
+        } catch (MalformedURLException | URISyntaxException e) {
+            return potentialUrl;
         }
     }
 
