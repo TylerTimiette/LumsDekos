@@ -31,9 +31,6 @@ public class DiscordWebhook {
         this.avatarUrl = avatarUrl;
     }
 
-    public void setDisplayname(String displayname) {
-    }
-
     public void execute() throws IOException {
         if (this.content == null) {
             throw new IllegalArgumentException("I don't know how this managed to happen, but the message sent has no content.");
@@ -42,7 +39,7 @@ public class DiscordWebhook {
             jsonObject.addProperty("content", this.content);
             jsonObject.addProperty("username", this.username);
             jsonObject.addProperty("avatar_url", this.avatarUrl);
-            if (LumsDekos.url.contains("discord.com/api/webhooks")) {
+            if (!LumsDekos.url.equalsIgnoreCase("changeme") && LumsDekos.url.contains("discord.com/api/webhooks")) {
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.addRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("User-Agent", "Timmy can go fuck his user agent lol");
