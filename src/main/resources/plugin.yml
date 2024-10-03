@@ -26,7 +26,7 @@ commands:
     permission-message: "§cYou're missing the following permission: §6<permission>"
   webhook:
     aliases: [whook, discordhook, discordwebhook, dhook, discordurl, webhookurl, setwebhook, sethook]
-    description: 'Sets the webhook that this plugin uses to communicate with Discord server. Only runnable by console.'
+    description: 'Sets the webhook that this plugin uses to communicate with Discord server. Only runnable by console, and only enabled when DiscordSRV is present.'
   arrow:
     aliases: [arr, chatmarker, marker, msgprefix]
     description: 'Changes the color of the > before your chat message.'
@@ -55,24 +55,24 @@ commands:
     description: 'Have fun with it.'
   listenmode:
     aliases: [clisten, listen]
-    description: 'Select the type of message you listen to through DiscordSRV. Values are bot, user, and all'
+    description: 'Select the type of message you listen to through DiscordSRV. Values are bot, user, and all. Only enabled when DiscordSRV is present.'
   channel:
     aliases: [channel, channelselect, chansel]
-    description: 'Select the channel of our Discord you want to listen to. It takes the ID as the value.'
+    description: 'Select the channel of our Discord you want to listen to. It takes the ID as the value. Only enabled when DiscordSRV is present.'
   talk:
     aliases: [charcmd, ccmd, characteraction]
-    description: 'Get a specified character to send a message in Discord.'
+    description: 'Get a specified character to send a message in Discord. Only enabled when DiscordSRV is present.'
   regchar:
     aliases: [registerchar, charregister, charreg]
-    description: 'Register a character!'
+    description: 'Register a character! Only enabled when DiscordSRV is present.'
   avatar:
     aliases: [charavatar, charav, avchar, avatarchar]
-    description: 'Implement an avatar for a character.'
+    description: 'Implement an avatar for a character. Only enabled when DiscordSRV is present.'
   delchar:
     aliases: [removechar, remchar, deletechar, killchar]
-    description: 'Delete a character from your player file.'
+    description: 'Delete a character from your player file. Only enabled when DiscordSRV is present.'
   listchars:
-    description: 'Command that, when used, iterates over the config file of the sender to show them what exactly is there.'
+    description: 'Command that, when used, iterates over the config file of the sender to show them what exactly is there. Only enabled when DiscordSRV is present.'
   tmode:
     aliases: [talkmode, talkingmode, seltalkmode]
-    description: '/tmode (discord|minecraft|both)'
+    description: '/tmode (discord|minecraft|both) A way to select whether you speak only in Discord, Minecraft, or both. Only enabled when DiscordSRV is present.'
