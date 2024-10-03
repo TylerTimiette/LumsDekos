@@ -8,6 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 
 public class AvatarCommand implements CommandExecutor {
 
@@ -24,16 +28,21 @@ public class AvatarCommand implements CommandExecutor {
 
             if (pf.getConfig().isSet("characters." + args[0])) {
                 if(args[1].startsWith("https://cdn.discordapp.com/attachments/")) {
+                    try {
+                        Image img = ImageIO.read(new URL(args[1]));
 
-                    if(args[1].endsWith(".png") || args[1].endsWith(".jpg")) {
+                        if (img != null) {
+                            pf.getConfig().set("characters." + args[0] + ".avatar", args[1]);
+                            p.sendMessage("Avatar set to " + args[1]);
+                        } else {
+                            p.sendMessage("This is not a valid avatar. Must be a PNG or JPG");
+                            sender.sendMessage("Usage: /avatar (name) (link) where Name is the character's name -- with no spaces -- and is what you use to type as them with /talk. \nLink is the Avatar URL -- please note that it must be an image link that is stored ON Discord. Post it in the bot channel, right click, and copy the link to it.");
+                        }
 
-                        pf.getConfig().set("characters." + args[0] + ".avatar", args[1]);
-                        p.sendMessage("Avatar set to " + args[1]);
 
-                    } else {
-                        p.sendMessage("This is not a valid avatar. Must be a PNG or JPG");
-                        sender.sendMessage("Usage: /avatar (name) (link) where Name is the character's name -- with no spaces -- and is what you use to type as them with /talk. \nLink is the Avatar URL -- please note that it must be an image link that is stored ON Discord. Post it in the bot channel, right click, and copy the link to it.");
 
+                    } catch(IOException e) {
+                        p.sendMessage("This does not lead to a recognizable image.");
                     }
                 } else {
                     p.sendMessage("This is not a valid Discord attachment.");

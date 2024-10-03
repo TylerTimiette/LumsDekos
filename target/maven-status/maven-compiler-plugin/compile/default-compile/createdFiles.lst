@@ -4,6 +4,7 @@ com\lum\database\Database.class
 com\lum\discord\commands\CharacterRegisterCommand.class
 com\lum\minecraft\handlers\BrandHandler.class
 com\lum\minecraft\listeners\AsyncPlayerChatListener.class
+com\lum\discord\DiscordMessageReceived.class
 com\lum\minecraft\botrelated\ChannelListenCommand.class
 com\lum\database\SQLite.class
 com\lum\minecraft\botrelated\ChannelListenMode.class

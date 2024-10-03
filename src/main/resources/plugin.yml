@@ -2,8 +2,8 @@ name: LumsDekos
 version: 1.21.1
 description: A decorative plugin.
 authors: [Gadse, Timiette]
-depend: [Vault, DiscordSRV, LuckPerms]
-
+depend: [Vault, LuckPerms]
+softdepend: [DiscordSRV]
 
 main: com.lum.LumsDekos
 api-version: 1.14

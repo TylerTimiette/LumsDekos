@@ -26,6 +26,7 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
 import net.milkbowl.vault.chat.Chat;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -118,18 +119,18 @@ public class AsyncPlayerChatListener implements Listener {
                 if (messagecheck.startsWith(playerData.getColor()) && playerData.getColor().contains("special_")) {
                     messagecheck = messagecheck.replace(playerData.getColor(), "");
                 }
-
-                try {
-                DiscordWebhook hook = new DiscordWebhook(new URL(LumsDekos.url));
-                hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
-                hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
-                hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
-                hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
-                hook.execute();
-                } catch (Exception var10) {
-                    System.out.println("Webhook integration failed.");
+                if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
+                    try {
+                        DiscordWebhook hook = new DiscordWebhook(new URL(LumsDekos.url));
+                        hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
+                        hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
+                        hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
+                        hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
+                        hook.execute();
+                    } catch (Exception var10) {
+                        System.out.println("Webhook integration failed.");
+                    }
                 }
-
                 TextComponent precursor = new TextComponent(this.color(Util.translateHexColorCodes("#", sb.toString())));
                 TextComponent message = new TextComponent(this.color(Util.translateHexColorCodes("#", messagecheck)));
                 precursor.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, this.color("&4Name: &c" + player.getName() + "\n" + "&4Rank: &c" + Objects.requireNonNull(LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId())).getPrimaryGroup() + "\n" + Util.translateHexColorCodes("#", playerData.getQuote()) + "\n&bClick to ignore this player!")));
@@ -137,21 +138,20 @@ public class AsyncPlayerChatListener implements Listener {
                 Util.sendChatMessage(player.getUniqueId(), new BaseComponent[]{precursor, message});
 
                 if (pf.getConfig().getString("talk-mode").equalsIgnoreCase("both")) {
+                    if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
+                        Member m = DiscordUtil.getJda().getGuilds().get(0).getMember(DiscordUtil.getJda().getUserById(DiscordSRV.getPlugin().getAccountLinkManager().getDiscordId(player.getUniqueId())));
 
-                    Member m = DiscordUtil.getJda().getGuilds().get(0).getMember(DiscordUtil.getJda().getUserById(DiscordSRV.getPlugin().getAccountLinkManager().getDiscordId(player.getUniqueId())));
+                        if (DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).canTalk(m)) {
 
-                    if (DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).canTalk(m)) {
+                            WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
+                            WebhookMessageBuilder builder = new WebhookMessageBuilder();
+                            builder.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
+                            builder.setContent(event.getMessage().replaceAll("@", "#"));
+                            builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
+                            client.send(builder.build());
 
-                        WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
-                        WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                        builder.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
-                        builder.setContent(event.getMessage().replaceAll("@", "#"));
-                        builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
-                        client.send(builder.build());
-
+                        }
                     }
-
-
                 }
 
 

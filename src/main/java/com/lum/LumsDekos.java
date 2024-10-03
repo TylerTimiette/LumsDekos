@@ -138,11 +138,13 @@ public class LumsDekos extends JavaPlugin  {
             this.getServer().getOnlinePlayers().forEach((player) -> {
                 Util.addPlayerData(player.getUniqueId());
             });
-            DiscordSRV.api.subscribe(reg);
-            DiscordSRV.api.subscribe(dlink);
-            DiscordSRV.api.subscribe(dunlink);
-            //DiscordSRV.api.subscribe(dmessr);
-            DiscordSRV.api.subscribe(whois);
+            if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
+                DiscordSRV.api.subscribe(reg);
+                DiscordSRV.api.subscribe(dlink);
+                DiscordSRV.api.subscribe(dunlink);
+                //DiscordSRV.api.subscribe(dmessr);
+                DiscordSRV.api.subscribe(whois);
+            }
         }
 
     }
