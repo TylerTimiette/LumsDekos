@@ -116,18 +116,7 @@ public class LumsDekos extends JavaPlugin  {
             ((PluginCommand)Objects.requireNonNull(this.getCommand("prefix"))).setExecutor(new PrefixCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("ignore"))).setExecutor(new IgnoreCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("color"))).setExecutor(new ColorCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("webhook"))).setExecutor(new WebhookCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("specialchat"))).setExecutor(new SpecialChatCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("channel"))).setExecutor(new ChannelListenCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("listenmode"))).setExecutor(new ChannelListenMode());
-
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("regchar"))).setExecutor(new CharacterRegisterCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("remchar"))).setExecutor(new CharacterRemoveCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("avatar"))).setExecutor(new AvatarCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("talk"))).setExecutor(new TalkCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("tmode"))).setExecutor(new TalkModeCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("listchars"))).setExecutor(new ListCharsCommand());
-
 
 
             this.getServer().getMessenger().registerIncomingPluginChannel(this, "minecraft:brand", new BrandHandler());
@@ -138,8 +127,21 @@ public class LumsDekos extends JavaPlugin  {
             this.getServer().getOnlinePlayers().forEach((player) -> {
                 Util.addPlayerData(player.getUniqueId());
             });
+
+            //We only really want these commands and events if DiscordSRV is there to support them.
             if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
                 getLogger().info("DiscordSRV detected! Enabling support.");
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("webhook"))).setExecutor(new WebhookCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("channel"))).setExecutor(new ChannelListenCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("listenmode"))).setExecutor(new ChannelListenMode());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("regchar"))).setExecutor(new CharacterRegisterCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("remchar"))).setExecutor(new CharacterRemoveCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("avatar"))).setExecutor(new AvatarCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("talk"))).setExecutor(new TalkCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("tmode"))).setExecutor(new TalkModeCommand());
+                ((PluginCommand)Objects.requireNonNull(this.getCommand("listchars"))).setExecutor(new ListCharsCommand());
+
+
                 DiscordSRV.api.subscribe(reg);
                 DiscordSRV.api.subscribe(dlink);
                 DiscordSRV.api.subscribe(dunlink);
