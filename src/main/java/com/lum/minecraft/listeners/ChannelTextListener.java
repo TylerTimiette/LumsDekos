@@ -110,16 +110,15 @@ public class ChannelTextListener implements Listener {
 //This event is already asynchronous, so we don't need to run this code asynchronously ourselves.
                     WebhookClient client = WebhookClient.withUrl(DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl());
                     WebhookMessageBuilder builder = new WebhookMessageBuilder();
-                    builder.setUsername(event.getPlayer().getName() + " // unity.exousia.online");
+                    builder.setUsername(event.getPlayer().getName() + " // " + LumsDekos.getPlugin().getConfig().getString("hostname"));
                     builder.setContent(event.getMessage());
                     builder.setAvatarUrl("https://mc-heads.net/head/" + event.getPlayer().getUniqueId() + ".png");
                     client.send(builder.build());
 
                     try {
                         DiscordWebhook hook = new DiscordWebhook(new URL(DiscordUtil.getTextChannelById(pf.getConfig().getString("connectedchannel")).retrieveWebhooks().complete().get(0).getUrl()));
-                        hook.setUsername(event.getPlayer().getName() + " // unity.exousia.online");
-                        hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
-                        hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
+                        hook.setUsername(event.getPlayer().getName() + " // " + LumsDekos.getPlugin().getConfig().getString("hostname"));
+                         hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
                         hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
 
                     } catch (Exception e) {

@@ -122,7 +122,6 @@ public class AsyncPlayerChatListener implements Listener {
                     try {
                         DiscordWebhook hook = new DiscordWebhook(new URL(LumsDekos.url));
                         hook.setUsername(ChatColor.stripColor(ChatColor.stripColor(player.getDisplayName().replaceAll("&[a-zA-Z0-9]", "")) + " // " + player.getName() + " (" + plugin.getConfig().getString("hostname")) + ")");
-                        hook.setDisplayname(ChatColor.stripColor(player.getDisplayName()).replaceAll("&[k-oK-O]", ""));
                         hook.setContent(ChatColor.stripColor(event.getMessage().replaceAll("&[a-zA-Z0-9]", "").replaceAll("@", "#")));
                         hook.setAvatarUrl("https://mc-heads.net/head/" + player.getUniqueId() + ".png");
                         hook.execute();
