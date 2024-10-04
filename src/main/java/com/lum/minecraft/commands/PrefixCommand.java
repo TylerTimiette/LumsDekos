@@ -27,7 +27,6 @@ public class PrefixCommand implements CommandExecutor {
             Chat chat = LumsDekos.getChat();
             String oldPrefix = ChatColor.stripColor(Util.translateHexColorCodes("#", ChatColor.translateAlternateColorCodes('&', chat.getPlayerPrefix((String)null, player))));
             String newPrefix = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', args[0]));
-            System.out.println(oldPrefix);
             if (!oldPrefix.equals(ChatColor.stripColor(Util.translateHexColorCodes("#", newPrefix)))) {
                 Util.sendMessage(sender, "Please use the exact prefix as before. You're only allowed to additionally specify new colors.");
                 return true;
