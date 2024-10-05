@@ -9,6 +9,7 @@ com\lum\minecraft\botrelated\ChannelListenCommand.class
 com\lum\database\SQLite.class
 com\lum\minecraft\botrelated\ChannelListenMode.class
 com\lum\minecraft\listeners\DiscordLinkListener.class
+com\lum\minecraft\commands\SizeCommand.class
 com\lum\minecraft\commands\ColorCommand.class
 com\lum\minecraft\commands\MeCommand$1.class
 com\lum\minecraft\listeners\DiscordUnlinkListener.class

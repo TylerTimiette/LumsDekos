@@ -28,6 +28,8 @@ public class SizeCommand implements CommandExecutor {
                                 if (Double.parseDouble(args[1]) >= 0.0625 && Double.parseDouble(args[1]) <= 4) {
                                     changePlayerSize(Bukkit.getPlayerExact(args[0]), Double.parseDouble(args[1]));
                                     Util.sendMessage(sender, "Changing the size of " + args[0] + " to " + args[1]);
+                                } else {
+                                    displayUsage(sender);
                                 }
                             } catch (NumberFormatException e) {
                                 displayUsage(sender);
@@ -39,18 +41,19 @@ public class SizeCommand implements CommandExecutor {
                 }
                 if(args.length == 1) {
                     if (sender.hasPermission("lums.size.self")) {
-                        if (Util.checkPlayer(sender)) {
+                        if (!Util.checkPlayer(sender)) {
                             Player player = (Player) sender;
                             try {
                                 if (Double.parseDouble(args[0]) >= 0.0625 && Double.parseDouble(args[0]) <= 4) {
                                     changePlayerSize(player, Double.parseDouble(args[0]));
-                                }
+                                } else
+                                    displayUsage(sender);
                             } catch (NumberFormatException e) {
                                 displayUsage(sender);
                             }
                             //Console can't change its own size!
                         } else
-                            Util.sendMessage(sender, "As console, you may only change another player's size. You may do this with /size (playername) (number ranging from 0.0625 -> 4).");
+                            Util.sendMessage(sender, "As console, you may only change another player's size. You may do this with /size (playername) (num from 0.0625 -> 4).");
                     } else
                         displayUsage(sender);
                 }
@@ -66,12 +69,12 @@ public class SizeCommand implements CommandExecutor {
     public void displayUsage(CommandSender sender) {
         //staff msg
         if(sender.hasPermission("lums.size.self")) {
-            if (sender.hasPermission("lums.size.others"))
-                Util.sendMessage(sender, "You have used an invalid number of arguments. This command allows you to change the size of others and yourself." +
-                        "\nTo change your size, use /size (number ranging from 0.0625 -> 4).\n" +
-                        "To change another player's size, use /size (playername) (number ranging from 0.0625 -> 4).");
-            else //Display player message
-                Util.sendMessage(sender, "You have used an invalid number of arguments. This command only allows you to use /size (number ranging from 0.0625 -> 4).");
+            if (sender.hasPermission("lums.size.others")) {
+                Util.sendMessage(sender, "You have used an invalid number of arguments. This command allows you to change the size of others and yourself.");
+                Util.sendMessage(sender, "To change your size, use /size (number ranging from 0.0625 -> 4).");
+                Util.sendMessage(sender, "To change another player's size, use /size (playername) (num from 0.0625 -> 4).");
+            } else //Display player message
+                Util.sendMessage(sender, "You have used an invalid number of arguments. This command only allows you to use /size (num from 0.0625 -> 4).");
         } else
             Util.sendMessage(sender, "No permission! Missing lums.size.self.");
     }

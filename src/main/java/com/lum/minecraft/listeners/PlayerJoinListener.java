@@ -43,25 +43,25 @@ try {
 
 
             //If the channel is a staff channel, do XYZ to ensure that they actually have access.
-            if (DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).canTalk(m)) {
+            if(pf.getConfig().getString("connectedchannel") != null || !pf.getConfig().getString("connectedchannel").equalsIgnoreCase("&")) {
+                if (DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).canTalk(m)) {
 
 
-                if (!pf.getConfig().getString("connectedchannel").equalsIgnoreCase("&"))
+                    if (!pf.getConfig().getString("connectedchannel").equalsIgnoreCase("&"))
 
 
-                    Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(LumsDekos.getPlugin(), new Runnable(){
-                        public void run(){
-                            event.getPlayer().sendMessage("Currently connected to Discord channel with ID " + pf.getConfig().getString("connectedchannel") + " (" + DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).getName() + ")");
-                            event.getPlayer().sendMessage(("Talking mode set to ") + pf.getConfig().getString("talk-mode").toUpperCase());
-                            event.getPlayer().sendMessage(("Listening mode set to ") + pf.getConfig().getString("listen-mode").toUpperCase());
-                        }
-                    }, 3*20);
+                        Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(LumsDekos.getPlugin(), new Runnable() {
+                            public void run() {
+                                event.getPlayer().sendMessage("Currently connected to Discord channel with ID " + pf.getConfig().getString("connectedchannel") + " (" + DiscordUtil.getJda().getTextChannelById(pf.getConfig().getString("connectedchannel")).getName() + ")");
+                                event.getPlayer().sendMessage(("Talking mode set to ") + pf.getConfig().getString("talk-mode").toUpperCase());
+                                event.getPlayer().sendMessage(("Listening mode set to ") + pf.getConfig().getString("listen-mode").toUpperCase());
+                            }
+                        }, 3 * 20);
 
 
-
-
-            } else
-                pf.getConfig().set("connectedchannel", "&");
+                } else
+                    pf.getConfig().set("connectedchannel", "&");
+            }
         }
     }
 } catch (IllegalArgumentException e) {
