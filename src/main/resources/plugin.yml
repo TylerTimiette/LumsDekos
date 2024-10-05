@@ -53,8 +53,8 @@ commands:
     permission: lums.chat.color
     description: 'Have fun with it.'
     permission-message: "§cYou're missing the following permission: §6<permission>"
-  size:
-    aliases: [scale, height]
+  scale:
+    aliases: [size, height]
     permission: lums.size
     description: 'A command that lets you set your scale attribute from between 0.0625 and 4.'
     permission-message: "§cYou're missing the following permission: §6<permission>"

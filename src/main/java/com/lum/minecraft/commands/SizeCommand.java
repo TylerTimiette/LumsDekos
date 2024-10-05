@@ -53,7 +53,7 @@ public class SizeCommand implements CommandExecutor {
                             }
                             //Console can't change its own size!
                         } else
-                            Util.sendMessage(sender, "As console, you may only change another player's size. You may do this with /size (playername) (num from 0.0625 -> 4).");
+                            Util.sendMessage(sender, "As console, you may only change another player's size. You may do this with /scale (playername) (num from 0.0625 -> 4).");
                     } else
                         displayUsage(sender);
                 }
@@ -71,10 +71,10 @@ public class SizeCommand implements CommandExecutor {
         if(sender.hasPermission("lums.size.self")) {
             if (sender.hasPermission("lums.size.others")) {
                 Util.sendMessage(sender, "You have used an invalid number of arguments. This command allows you to change the size of others and yourself.");
-                Util.sendMessage(sender, "To change your size, use /size (number ranging from 0.0625 -> 4).");
-                Util.sendMessage(sender, "To change another player's size, use /size (playername) (num from 0.0625 -> 4).");
+                Util.sendMessage(sender, "To change your size, use /scale (number ranging from 0.0625 -> 4).");
+                Util.sendMessage(sender, "To change another player's size, use /scale (playername) (num from 0.0625 -> 4).");
             } else //Display player message
-                Util.sendMessage(sender, "You have used an invalid number of arguments. This command only allows you to use /size (num from 0.0625 -> 4).");
+                Util.sendMessage(sender, "You have used an invalid number of arguments. This command only allows you to use /scale (num from 0.0625 -> 4).");
         } else
             Util.sendMessage(sender, "No permission! Missing lums.size.self.");
     }

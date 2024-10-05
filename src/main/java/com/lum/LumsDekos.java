@@ -107,7 +107,7 @@ public class LumsDekos extends JavaPlugin  {
             ((PluginCommand)Objects.requireNonNull(this.getCommand("ignore"))).setExecutor(new IgnoreCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("color"))).setExecutor(new ColorCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("specialchat"))).setExecutor(new SpecialChatCommand());
-            ((PluginCommand)Objects.requireNonNull(this.getCommand("size"))).setExecutor(new SizeCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("scale"))).setExecutor(new SizeCommand());
 
 
             this.getServer().getMessenger().registerIncomingPluginChannel(this, "minecraft:brand", new BrandHandler());
