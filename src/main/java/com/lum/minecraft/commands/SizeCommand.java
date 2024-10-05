@@ -72,7 +72,7 @@ public class SizeCommand implements CommandExecutor {
             else //Display player message
                 Util.sendMessage(sender, "You have used an invalid number of arguments. This command only allows you to use /size (number ranging from 0.0625 -> 4).");
         } else
-            Util.sendMessage(sender, "No permission! Missing size.change.");
+            Util.sendMessage(sender, "No permission! Missing size.change.self.");
     }
 
 
