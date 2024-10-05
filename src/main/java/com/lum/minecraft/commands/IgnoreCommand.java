@@ -53,7 +53,7 @@ public class IgnoreCommand implements CommandExecutor {
                 if (target == null) {
                     Util.sendMessage(sender, "&cThe player &f" + args[0] + " &ccould not be found.");
                     return true;
-                } else if (target.hasPermission("chat.unignorable")) {
+                } else if (target.hasPermission("lums.unignorable")) {
                     Util.sendMessage(sender, "&cThis player can not be ignored.");
                     return true;
                 } else if (player.getUniqueId().equals(target.getUniqueId())) {

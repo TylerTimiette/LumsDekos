@@ -12,17 +12,17 @@ commands:
   nick:
     description: 'Nickname command'
     aliases: [nickname]
+    permission: lums.chat.nick
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   prefix:
     aliases: [pfx, cpfx]
     description: 'Prefix command'
-    # All permissions should be the same for a plugin.
-    # consider decos.<command> to make permissions consistent
-    permission: cpfx.pfx
+    permission: lums.cpfx.pfx
     permission-message: "§cYou're missing the following permission: §6<permission>"
   emote:
     aliases: [em, emoticon, emoji]
     description: 'Emoticons that go before and after prefix.'
-    permission: cpfx.pfx
+    permission: lums.cpfx.pfx
     permission-message: "§cYou're missing the following permission: §6<permission>"
   webhook:
     aliases: [whook, discordhook, discordwebhook, dhook, discordurl, webhookurl, setwebhook, sethook]
@@ -30,54 +30,134 @@ commands:
   arrow:
     aliases: [arr, chatmarker, marker, msgprefix]
     description: 'Changes the color of the > before your chat message.'
-    permission: cpfx.arrow
+    permission: lums.cpfx.arrow
     permission-message: "§cYou're missing the following permission: §6<permission>"
   quote:
     description: 'Changes the text that is displayed when your name is hovered over.'
-    permission: cpfx.custom
+    permission: lums.chat.quote
     permission-message: "§cYou're missing the following permission: §6<permission>"
   ignore:
     description: 'I wonder what this could be used for.'
   link:
     aliases: [web, website, url]
     description: 'For sending links.'
-    permission: chat.links
-    permission-message: "§cYou're missing the following permission: §6<permission>"
   color:
     aliases: [cc, chatcolor, chat]
-    permission: chat.color
+    permission: lums.chat.color
     description: 'For changing your chat color.'
     permission-message: "§cYou're missing the following permission: §6<permission>"
   me:
     aliases: [action, oorp]
     description: 'Do fancy stuff'
   specialchat:
+    permission: lums.chat.color
     description: 'Have fun with it.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   size:
     aliases: [scale, height]
-    permission: size.change
+    permission: lums.size
     description: 'A command that lets you set your scale attribute from between 0.0625 and 4.'
     permission-message: "§cYou're missing the following permission: §6<permission>"
   listenmode:
     aliases: [clisten, listen]
+    permission: lums.disc.listenmode
     description: 'Select the type of message you listen to through DiscordSRV. Values are bot, user, and all. Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   channel:
     aliases: [channel, channelselect, chansel]
+    permission: lums.disc.channel
     description: 'Select the channel of our Discord you want to listen to. It takes the ID as the value. Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   talk:
     aliases: [charcmd, ccmd, characteraction]
+    permission: lums.disc.talk
     description: 'Get a specified character to send a message in Discord. Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   regchar:
     aliases: [registerchar, charregister, charreg]
+    permission: lums.disc.regchar
     description: 'Register a character! Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   avatar:
     aliases: [charavatar, charav, avchar, avatarchar]
-    description: 'Implement an avatar for a character. Only enabled when DiscordSRV is present.'
+    permission: lums.disc.regchar
+    description: 'Implement an avatar for a character! Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   delchar:
     aliases: [removechar, remchar, deletechar, killchar]
-    description: 'Delete a character from your player file. Only enabled when DiscordSRV is present.'
+    permission: lums.disc.regchar
+    description: 'Delete a character from your player file! Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   listchars:
-    description: 'Command that, when used, iterates over the config file of the sender to show them what exactly is there. Only enabled when DiscordSRV is present.'
+    permission: lums.disc.regchar
+    description: 'Command that, when used, iterates over the config file of the sender to show them what exactly is there! Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
   tmode:
     aliases: [talkmode, talkingmode, seltalkmode]
+    permission: lums.disc.talk
     description: '/tmode (discord|minecraft|both) A way to select whether you speak only in Discord, Minecraft, or both. Only enabled when DiscordSRV is present.'
+    permission-message: "§cYou're missing the following permission: §6<permission>"
+
+  permissions:
+    lums.size.*:
+      description: 'Parent permission for /size'
+      children:
+        lums.size.self: true
+        lums.size.others: true
+    lums.size.self:
+      description: 'Allows player to change their size.'
+      default: op
+    lums.size.others:
+      description: 'Allows player to change the size of another player.'
+      default: op
+    lums.disc.*:
+      description: 'Parent permission for all things related to the Discord integration in LumsDekos'
+      children:
+        lums.disc.listenmode: true
+        lums.disc.channel: true
+        lums.disc.talk: true
+        lums.disc.regchar: true
+    lums.disc.listenmode:
+      description: 'Allows usage of /listenmode!'
+      default: op
+    lums.disc.channel:
+      description: 'Allows usage of /channel!'
+      default: op
+    lums.disc.regchar:
+      description: 'Allows usage of /regchar, /listchars, /avatar & /delchar!'
+      default: op
+    lums.disc.talk:
+      description: 'Allows usage of /talk & /tmode!'
+      default: op
+    lums.cpfx.*:
+      description: 'Parent permission for all things relating to prefix customization in LumsDekos'
+      children:
+        lums.cpfx.arrow: true
+        lums.cpfx.pfx: true
+    lums.cpfx.arrow:
+      description: 'Allows usage of /arrow!'
+      default: op
+    lums.cpfx.pfx:
+      description: 'Allows usage of /prefix & /emote!'
+      default: op
+    lums.chat.*:
+      description: 'Parent permission for all things relating to chat message customization in LumsDekos'
+      children:
+        lums.chat.nick: true
+        lums.chat.quote: true
+        lums.chat.color: true
+    lums.chat.nick:
+      description: 'Allows usage of /nick!'
+      default: false
+    lums.chat.quote:
+      description: 'Allows usage of /quote!'
+      default: false
+    lums.chat.color:
+      description: 'Allows usage of /chat & /specialchat!'
+      default: op
+    lums.unignorable:
+      description: 'Renders the user unaffected by /ignore.'
+      default: op
+    lums.setInt:
+      description: 'Allows setting the integer in the config from the game.'
+      default: op

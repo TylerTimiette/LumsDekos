@@ -22,7 +22,7 @@ public class SizeCommand implements CommandExecutor {
         if(args.length >= 1) {
             if (args.length <= 2) {
                 if (args.length == 2) {
-                    if (sender.hasPermission("size.change.others")) {
+                    if (sender.hasPermission("lums.size.others")) {
                         if (Bukkit.getServer().getPlayerExact(args[0]) != null) {
                             try {
                                 if (Double.parseDouble(args[1]) >= 0.0625 && Double.parseDouble(args[1]) <= 4) {
@@ -38,7 +38,7 @@ public class SizeCommand implements CommandExecutor {
                         displayUsage(sender);
                 }
                 if(args.length == 1) {
-                    if (sender.hasPermission("size.change.self")) {
+                    if (sender.hasPermission("lums.size.self")) {
                         if (Util.checkPlayer(sender)) {
                             Player player = (Player) sender;
                             try {
@@ -57,22 +57,23 @@ public class SizeCommand implements CommandExecutor {
             } else
                 displayUsage(sender);
 
-        } else
+        } else {
             displayUsage(sender);
+        }
         return true;
     }
 
     public void displayUsage(CommandSender sender) {
         //staff msg
-        if(sender.hasPermission("size.change.self")) {
-            if (sender.hasPermission("size.change.others"))
+        if(sender.hasPermission("lums.size.self")) {
+            if (sender.hasPermission("lums.size.others"))
                 Util.sendMessage(sender, "You have used an invalid number of arguments. This command allows you to change the size of others and yourself." +
                         "\nTo change your size, use /size (number ranging from 0.0625 -> 4).\n" +
                         "To change another player's size, use /size (playername) (number ranging from 0.0625 -> 4).");
             else //Display player message
                 Util.sendMessage(sender, "You have used an invalid number of arguments. This command only allows you to use /size (number ranging from 0.0625 -> 4).");
         } else
-            Util.sendMessage(sender, "No permission! Missing size.change.self.");
+            Util.sendMessage(sender, "No permission! Missing lums.size.self.");
     }
 
 
