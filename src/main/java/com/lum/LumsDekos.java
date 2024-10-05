@@ -5,16 +5,7 @@ import com.lum.discord.DiscordReadyListener;
 import com.lum.discord.commands.*;
 import com.lum.minecraft.botrelated.ChannelListenCommand;
 import com.lum.minecraft.botrelated.ChannelListenMode;
-import com.lum.minecraft.commands.ArrowCommand;
-import com.lum.minecraft.commands.ColorCommand;
-import com.lum.minecraft.commands.EmoteCommand;
-import com.lum.minecraft.commands.IgnoreCommand;
-import com.lum.minecraft.commands.URLCommand;
-import com.lum.minecraft.commands.MeCommand;
-import com.lum.minecraft.commands.NickCommand;
-import com.lum.minecraft.commands.PrefixCommand;
-import com.lum.minecraft.commands.QuoteCommand;
-import com.lum.minecraft.commands.SpecialChatCommand;
+import com.lum.minecraft.commands.*;
 import com.lum.minecraft.botrelated.WebhookCommand;
 import com.lum.database.Database;
 import com.lum.database.SQLite;
@@ -116,6 +107,7 @@ public class LumsDekos extends JavaPlugin  {
             ((PluginCommand)Objects.requireNonNull(this.getCommand("ignore"))).setExecutor(new IgnoreCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("color"))).setExecutor(new ColorCommand());
             ((PluginCommand)Objects.requireNonNull(this.getCommand("specialchat"))).setExecutor(new SpecialChatCommand());
+            ((PluginCommand)Objects.requireNonNull(this.getCommand("size"))).setExecutor(new SizeCommand());
 
 
             this.getServer().getMessenger().registerIncomingPluginChannel(this, "minecraft:brand", new BrandHandler());
@@ -126,6 +118,7 @@ public class LumsDekos extends JavaPlugin  {
             this.getServer().getOnlinePlayers().forEach((player) -> {
                 Util.addPlayerData(player.getUniqueId());
             });
+
 
             //We only really want these commands and events if DiscordSRV is there to support them.
             if(Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
