@@ -32,17 +32,22 @@ public class DiscordMessageReceived {
         //Here we start building our Component.
         final Component text = Component.text("");
 
-        for (int i = 0; i < messageArray.length; i++) {
+       // text.append()
+        for (String s : messageArray) {
             //We now check if any given word in the string is a URL. We do this by just trying everything.
             try {
-                new URL(messageArray[i]).toURI();
-                messageArray[i] = "(LINK)";
+                new URL(s).toURI();
                 text.append(Component.text("(LINK)", NamedTextColor.AQUA).decoration(TextDecoration.BOLD, true));
             } catch (MalformedURLException | URISyntaxException ignored) {
                 //If there's an exception, it's not a URL! Therefore, we don't do anything special.
+                text.append(Component.text(s).asComponent());
+                System.out.println(e.getProcessedMessage());
             }
         }
+
         //Setting our (maybe) modded message to be sent off
+        e.setProcessedMessage(text.toString());
+        System.out.println(e.getProcessedMessage());
         e.setMinecraftMessage(text);
 
     }

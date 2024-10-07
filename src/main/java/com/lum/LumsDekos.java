@@ -137,7 +137,7 @@ public class LumsDekos extends JavaPlugin  {
                 DiscordSRV.api.subscribe(reg);
                 DiscordSRV.api.subscribe(dlink);
                 DiscordSRV.api.subscribe(dunlink);
-                //DiscordSRV.api.subscribe(dmessr);
+              //DiscordSRV.api.subscribe(dmessr);
                 DiscordSRV.api.subscribe(whois);
             } else getLogger().warning("DiscordSRV not detected. To make the most of this plugin, we would recommend installing it!");
         }
