@@ -35,9 +35,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class AsyncPlayerChatListener implements Listener {
     private final LumsDekos plugin;
-    private final List<UUID> partyChat = new ArrayList<>();
-    private final List<UUID> sctChat = new ArrayList<>();
-    private List<UUID> marryChat = new ArrayList<>();
+
 
     public AsyncPlayerChatListener(LumsDekos plugin) {
         this.plugin = plugin;
@@ -49,10 +47,8 @@ public class AsyncPlayerChatListener implements Listener {
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (event.isCancelled()) {
-            if (this.partyChat.contains(player.getUniqueId())) {
-                this.plugin.getLogger().info("(PARTY) " + player.getName() + ": " + event.getMessage());
-            } else if (this.sctChat.contains(player.getUniqueId())) {
-                this.plugin.getLogger().info("(SCT) " + player.getName() + ": " + event.getMessage());
+            if (Util.getQuietList().containsKey(player.getUniqueId())) {
+                this.plugin.getLogger().info("(" + Util.getQuietList().get(player.getUniqueId()) + ") " + player.getName() + ": " + event.getMessage());
             }
         } else {
             event.setCancelled(true);
@@ -168,11 +164,11 @@ public class AsyncPlayerChatListener implements Listener {
     public void onCommand(PlayerCommandPreprocessEvent event) {
         UUID player = event.getPlayer().getUniqueId();
         String message = event.getMessage();
-        if (message.equalsIgnoreCase("/party chat")) {
-            if (this.partyChat.contains(player)) {
-                this.partyChat.remove(player);
+/**        if (message.equalsIgnoreCase("/party chat")) {
+            if (Util.getQuietList().containsKey(player)) {
+                Util.getQuietList().remove(player);
             } else {
-                this.partyChat.add(player);
+                Util.getQuietList().put(player, "PARTY");
             }
         } else {
             if (message.contains("/mpm name")) {
@@ -180,21 +176,22 @@ public class AsyncPlayerChatListener implements Listener {
             }
 
             if (message.contains("/marry chat toggle")) {
-                if (this.marryChat.contains(player)) {
-                    this.marryChat.remove(player);
+                if (Util.getQuietList().containsKey(player)) {
+                    Util.getQuietList().remove(player);
                 } else {
-                    this.marryChat.add(player);
+                    Util.getQuietList().put(player, "MARRY");
                 }
             }
+ I commented this part out because at some point I would like to make dedicated chat channels a part of the plugin.
+ **/
 
-            if (message.equalsIgnoreCase("/sct")) {
-                if (this.sctChat.contains(player)) {
-                    this.sctChat.remove(player);
+            if (message.equalsIgnoreCase("/sct") || message.equalsIgnoreCase("/sctoggle")) {
+                if (Util.getQuietList().containsKey(player)) {
+                    Util.removeQuiet(player);
                 } else {
-                    this.sctChat.add(player);
+                    Util.addToQuietMessages(player, "SCT");
                 }
             }
         }
 
-    }
 }

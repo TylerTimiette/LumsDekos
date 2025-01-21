@@ -16,6 +16,9 @@ public class PlayerQuitListener implements Listener {
         if (Util.hasPlayerData(player)) {
             Util.getPlayerData(player).save();
             Util.removePlayerData(player);
+            if(Util.getQuietList().containsKey(player)) {
+                Util.removeQuiet(player);
+            }
         }
 
     }

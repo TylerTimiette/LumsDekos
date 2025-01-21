@@ -3,9 +3,7 @@ package com.lum.utilities;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +18,7 @@ public class Util {
     private static String prefix = "";
     private static final Map<UUID, PlayerData> playerData = new HashMap();
     public static final char COLOR_CHAR = '§';
-
+    public static final Map<UUID, String> quietChat = new HashMap<>();
     public Util() {
     }
 
@@ -50,6 +48,18 @@ public class Util {
 
     public static void removePlayerData(UUID uuid) {
         playerData.remove(uuid);
+    }
+
+    public static void addToQuietMessages(UUID uuid, String s) {
+        quietChat.put(uuid, s);
+    }
+
+    public static void removeQuiet(UUID uuid) {
+        quietChat.remove(uuid);
+    }
+
+    public static Map<UUID, String> getQuietList() {
+        return quietChat;
     }
 
     public static boolean checkPlayer(CommandSender sender) {
